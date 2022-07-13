@@ -1,0 +1,22 @@
+{
+    "name": "shieldforce/framework-shieldforce",
+    "description": "Um framework para soluções PHP",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shieldforce\\FrameworkShieldforce\\": "app/"
+        },
+        "files": [
+            "Helpers/system.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Alexandre Ferreira do Nascimento"
+        }
+    ],
+    "require": {
+        "php": ">=7.4|<=8.1"
+    }
+}
