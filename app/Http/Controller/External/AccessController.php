@@ -8,8 +8,8 @@ class AccessController extends TemplateController
 {
     public static function login()
     {
-        $js = View::render("external/main/login/js/index", []);
-        $head = View::render("external/main/login/css/index", []);
+        $js = View::component("external/main/login/js/index", []);
+        $head = View::component("external/main/login/css/index", []);
         $content = View::render("external/main/login", []);
         return self::getTemplate($content, [
             "title" => "Login!",
@@ -21,8 +21,8 @@ class AccessController extends TemplateController
 
     public static function register()
     {
-        $js = View::render("external/main/register/js/index", []);
-        $head = View::render("external/main/register/css/index", []);
+        $js = View::component("external/main/register/js/index", []);
+        $head = View::component("external/main/register/css/index", []);
         $content = View::render("external/main/register", []);
         return self::getTemplate($content, [
             "title" => "Cadastro!",

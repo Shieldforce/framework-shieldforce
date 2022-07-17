@@ -8,8 +8,8 @@ class MainController extends TemplateController
 {
     public static function getIndex()
     {
-        $js = View::render("external/main/index/js/index", []);
-        $head = View::render("external/main/index/css/index", []);
+        $js = View::component("external/main/index/js/index", []);
+        $head = View::component("external/main/index/css/index", []);
         $content = View::render("external/main/index", [
             "date('Y')" => date('Y')
         ]);

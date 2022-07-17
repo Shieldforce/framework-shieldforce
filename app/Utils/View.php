@@ -47,4 +47,20 @@ class View
         }, $keys);
         return str_replace($keys, array_values($vars), $contentView);
     }
+
+    /**
+     * @param $view
+     * @param array $vars (string/numeric)
+     * @return false|string
+     */
+    public static function component($view, $vars = [])
+    {
+        $contentView = self::getContentView($view);
+        $vars = array_merge_recursive(self::$variablesSystem, $vars);
+        $keys = array_keys($vars);
+        $keys = array_map(function ($item){
+            return '{{'.$item.'}}';
+        }, $keys);
+        return str_replace($keys, array_values($vars), $contentView);
+    }
 }

@@ -13,7 +13,7 @@ class MainController extends TemplateController
     {
         $trance_list = "";
         foreach ($traces as $tr) {
-            $trance_list .= View::render("errors/template/components/trace_list", [
+            $trance_list .= View::component("errors/template/components/trace_list", [
                 "trace_file" => $tr["file"],
                 "trace_line" => $tr["line"],
                 "trace_function" => $tr["function"],
@@ -31,8 +31,8 @@ class MainController extends TemplateController
         $previous = $exception->getPrevious();
         $file = $exception->getFile();
         $line = $exception->getLine();
-        $js = View::render("errors/main/getErrors/js/index", []);
-        $head = View::render("errors/main/getErrors/css/index", []);
+        $js = View::component("errors/main/getErrors/js/index", []);
+        $head = View::component("errors/main/getErrors/css/index", []);
         $content = View::render("errors/main/getErrors", [
             "code" => $code,
             "message" => $message,
