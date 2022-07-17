@@ -15,13 +15,13 @@ View::init([
 
 $route->get("/", [
     function() {
-        return new Response(200, External\MainController::getIndex());
+        return new Response(200, External\MainController::index());
     }
 ]);
 
 $route->get("/login", [
-    function() {
-        return new Response(200, External\AccessController::login());
+    function($request) {
+        return new Response(200, External\AccessController::login($request));
     }
 ]);
 

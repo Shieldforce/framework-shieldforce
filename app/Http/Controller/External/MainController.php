@@ -6,11 +6,13 @@ use App\Utils\View;
 
 class MainController extends TemplateController
 {
-    public static function getIndex()
+    private static $prefixPath = "external/main";
+
+    public static function index()
     {
-        $js = View::component("external/main/index/js/index", []);
-        $head = View::component("external/main/index/css/index", []);
-        $content = View::render("external/main/index", [
+        $js = View::component(self::$prefixPath."/index/js/index", []);
+        $head = View::component(self::$prefixPath."/index/css/index", []);
+        $content = View::render(self::$prefixPath."/index", [
             "date('Y')" => date('Y')
         ]);
         return self::getTemplate($content, [

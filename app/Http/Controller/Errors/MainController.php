@@ -9,6 +9,8 @@ use Throwable;
 class MainController extends TemplateController
 {
 
+    private static $prefixPath = "errors/main";
+
     public static function traceList($traces)
     {
         $trance_list = "";
@@ -31,9 +33,9 @@ class MainController extends TemplateController
         $previous = $exception->getPrevious();
         $file = $exception->getFile();
         $line = $exception->getLine();
-        $js = View::component("errors/main/getErrors/js/index", []);
-        $head = View::component("errors/main/getErrors/css/index", []);
-        $content = View::render("errors/main/getErrors", [
+        $js = View::component(self::$prefixPath."/getErrors/js/index", []);
+        $head = View::component(self::$prefixPath."/getErrors/css/index", []);
+        $content = View::render(self::$prefixPath."/getErrors", [
             "code" => $code,
             "message" => $message,
             "previous" => $previous,
