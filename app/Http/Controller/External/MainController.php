@@ -8,10 +8,16 @@ class MainController extends TemplateController
 {
     public static function getIndex()
     {
-        $content = View::render("external/main/index", []);
+        $js = View::render("external/main/index/js/index", []);
+        $head = View::render("external/main/index/css/index", []);
+        $content = View::render("external/main/index", [
+            "date('Y')" => date('Y')
+        ]);
         return self::getTemplate($content, [
-            "title" => "Página principal!",
+            "title" => "Principal",
             "description" => "Framework shield-force",
+            "javascript-custom" => $js,
+            "head-custom" => $head,
         ]);
     }
 }

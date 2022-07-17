@@ -18,7 +18,8 @@ try {
 
 }  catch (\Throwable $exception) {
 
-    $error->report($exception);
-}
+    $instaceException = $error->report($exception);
 
-ddError($error);
+    echo \App\Http\Controller\Errors\MainController::getErrors($instaceException);
+
+}

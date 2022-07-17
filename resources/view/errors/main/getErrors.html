@@ -1,0 +1,55 @@
+<div class="error-page">
+    <div class="error-page-content">
+        <div class="card mb-5 mx-auto" style="width: 500px;">
+            <div class="card-body">
+                <div class="card">
+                    <div class="error-code">{{code}}</div>
+                    <div class="card-arrow">
+                        <div class="card-arrow-top-left"></div>
+                        <div class="card-arrow-top-right"></div>
+                        <div class="card-arrow-bottom-left"></div>
+                        <div class="card-arrow-bottom-right"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+        </div>
+        <h1>Oops!</h1>
+        <h3 class="text-danger">{{message}}</h3>
+        <hr />
+        <table class="table">
+            <thead class="bg-danger">
+            <tr>
+                <td >File:</td>
+                <td colspan="4" style="text-align: left;">{{file}}</td>
+            </tr>
+            </thead>
+            <thead class="bg-danger">
+            <tr>
+                <td >Line:</td>
+                <td colspan="4" style="text-align: left;">{{line}}</td>
+            </tr>
+            </thead>
+            <thead>
+            <tr>
+                <th style="width: 40%;">File</th>
+                <th style="width: 10%;">Line</th>
+                <th style="width: 10%;">Function</th>
+                <th style="width: 30%;">Class</th>
+                <th style="width: 10%;">Type</th>
+            </tr>
+            </thead>
+            <tbody>
+                {{trace_list}}
+            </tbody>
+        </table>
+        <hr />
+        <a href="javascript:window.history.back();" class="btn btn-outline-theme px-3 rounded-pill"><i class="fa fa-arrow-left me-1 ms-n1"></i> Voltar Página</a>
+    </div>
+</div>
+<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>

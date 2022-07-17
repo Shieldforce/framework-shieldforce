@@ -19,15 +19,15 @@ $route->get("/", [
     }
 ]);
 
-$route->get("/sobre", [
+$route->get("/login", [
     function() {
-        return new Response(200, External\MainController::getIndex());
+        return new Response(200, External\AccessController::login());
     }
 ]);
 
-$route->get("/pagina/{id}/{action}", [
-    function($id, $action) {
-        return new Response(200, "Pagina {$id}.{$action}");
+$route->get("/register", [
+    function() {
+        return new Response(200, External\AccessController::register());
     }
 ]);
 

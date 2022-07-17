@@ -1,0 +1,27 @@
+<div class="coming-soon">
+    <div class="flex-1">
+        <div class="coming-soon-timer">
+            <div id="timer"></div>
+        </div>
+        <div class="coming-soon-content d-flex flex-column">
+            <div class="flex-1 mb-3">
+                <h2 class="mb-3">O que ainda posso fazer em {{date('Y')}} ?</h2>
+                <p class="mb-4">Já parou para pensar se você foi produtivo ?<br /> Se realmente realizou algum coisa neste ano?!</p>
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control col-6" placeholder="Seu melhor e-mail" />
+                    <button type="submit" class="btn btn-outline-theme col-6">NEWSLETTER</button>
+                </div>
+
+                <div class="input-group mb-2">
+                    <a href="/login" class="btn btn-outline-info col-6">LOGIN</a>
+                    <a href="/register" class="btn btn-outline-info col-6">REGISTER</a>
+                </div>
+                <div class="mb-1 small text-white text-opacity-50">* Se inscreva e receba dicas de programação!</div>
+            </div>
+            <div class="text-center small text-white text-opacity-50">
+                &copy; 2010 Todos os direitos reservados para {{env('APP_NAME')}}
+            </div>
+        </div>
+    </div>
+</div>
+<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>

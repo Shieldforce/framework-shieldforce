@@ -196,32 +196,28 @@ class Router
      */
     public function run()
     {
-        try {
 
-            // get route currency
-            $route = $this->getRoute();
+        // get route currency
+        $route = $this->getRoute();
 
-            // Verify controller
-            if(!isset($route['controller'])) {
-                throw new Exception("Url cannot be processed", 500);
-            }
-
-            // Arguments of function
-            $args = [];
-
-            // Reflection
-            $reflection = new ReflectionFunction($route['controller']);
-            foreach ($reflection->getParameters() as $parameter) {
-                $name = $parameter->getName();
-                $args[$name] = $route['variables'][$name] ?? '';
-            }
-
-            // Return execute controller
-            return call_user_func_array($route['controller'], $args);
-
-        } catch (Exception $exception) {
-            return new Response($exception->getCode(), $exception->getMessage());
+        // Verify controller
+        if(!isset($route['controller'])) {
+            throw new Exception("Url cannot be processed", 500);
         }
+
+        // Arguments of function
+        $args = [];
+
+        // Reflection
+        $reflection = new ReflectionFunction($route['controller']);
+        foreach ($reflection->getParameters() as $parameter) {
+            $name = $parameter->getName();
+            $args[$name] = $route['variables'][$name] ?? '';
+        }
+
+        // Return execute controller
+        return call_user_func_array($route['controller'], $args);
+
     }
 
 }
