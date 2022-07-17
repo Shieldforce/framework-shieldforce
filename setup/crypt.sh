@@ -5,6 +5,6 @@
 # shellcheck disable=SC2046
 
 execute(){
-  echo $1
+  echo $(echo $1 | openssl enc -e -des3 -base64 -pass pass:mypasswd -pbkdf2)
 }
 execute $1

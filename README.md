@@ -2,8 +2,26 @@
 - Para desenvolvimento PHP!
 
 
-### Comandos para rodar o framework
+### Setup (1) de instalação do Framework!
 
 ```
-bash setup/start.sh
+$: sfrun --start-system
+```
+
+### Comando de Ajuda
+
+```
+$: sfrun --help
+```
+
+### Versão Framework
+
+```
+$: sfrun --v
+```
+
+### Servidor Embutido
+
+```
+$: sfrun --start-server --port 3000 --host localhost --path /public
 ```

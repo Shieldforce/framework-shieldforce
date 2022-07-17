@@ -5,10 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Shieldforce\\FrameworkShieldforce\\": "app/"
+            "Config\\": "config/",
+            "App\\": "app/"
         },
         "files": [
-            "Helpers/system.php"
+            "app/Helpers/system.php",
+            "app/Helpers/dd.php"
         ]
     },
     "authors": [
@@ -17,6 +19,9 @@
         }
     ],
     "require": {
-        "php": ">=7.4|<=8.1"
+        "php": ">=7.4|<=8.1",
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.4",
+        "ext-json": "*"
     }
 }
