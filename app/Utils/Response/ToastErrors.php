@@ -41,7 +41,6 @@ class ToastErrors
         if (isset($request)) {
             $iconToast       = 'fa fa-ban';
             $typeToast       = "danger";
-            $titleToast      = $title;
             $messageToast    = "<ul>";
             $messageToast   .= "<li>{$message}</li>";
             $messageToast   .= "</ul>";
@@ -49,7 +48,28 @@ class ToastErrors
             $visibilityToast = true;
             return ComponentsGlobals::toastForPhp(
                 $visibilityToast,
-                $titleToast,
+                $title,
+                $messageToast,
+                $codeToast,
+                $typeToast,
+                $iconToast
+            );
+        }
+        return null;
+    }
+
+    public static function custom($request, $title='title empty', $message='message empty', $codeToast='Not Code')
+    {
+        if (isset($request)) {
+            $iconToast       = 'fa fa-ban';
+            $typeToast       = "danger";
+            $messageToast    = "<ul>";
+            $messageToast   .= "<li>{$message}</li>";
+            $messageToast   .= "</ul>";
+            $visibilityToast = true;
+            return ComponentsGlobals::toastForPhp(
+                $visibilityToast,
+                $title,
                 $messageToast,
                 $codeToast,
                 $typeToast,
