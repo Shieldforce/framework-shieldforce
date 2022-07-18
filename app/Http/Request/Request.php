@@ -101,7 +101,7 @@ class Request
      * Responsable for request is POST
      * @return array
      */
-    public function getPostParamns()
+    public function getPostParams()
     {
         return $this->postParams;
     }
@@ -126,11 +126,16 @@ class Request
 
     /**
      * Responsable for capture URI
-     * @return array
+     * @return string
      */
     public function getUri()
     {
         return $this->uri;
+    }
+
+    public function setPostParamsSanitize(array $newParams)
+    {
+        $this->postParams = $newParams;
     }
 
     /**

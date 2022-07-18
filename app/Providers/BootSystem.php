@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\ConfigMiddlewares;
+use App\Http\Middleware\Core\ConfigMiddlewares;
+use App\Http\Middleware\Core\QueueMiddleware;
 use App\Http\Router;
-use \App\Http\Middleware\QueueMiddleware;
 
 class BootSystem
 {
     public static function execute()
     {
-        session_start();
+        // session_start();
 
         // $startConnection = \Config\db\StartConnection::getConnection();
 

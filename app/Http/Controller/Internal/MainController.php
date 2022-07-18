@@ -2,18 +2,25 @@
 
 namespace App\Http\Controller\Internal;
 
+use App\Sessions\Auth\AuthSession;
 use App\Utils\View;
+use Exception;
 
 class MainController extends TemplateController
 {
-    private static $prefixPath = "internal.main.";
-
-    public static function dashboard()
+    public static function dashboard($request)
     {
-        $content = View::render(self::$prefixPath."dashboard", []);
+        $content = View::render($request->getRouter()->getName(), []);
         return self::getTemplate($content, [
-            "title" => "Página Principal!",
+            "title"       => "Página Principal!",
             "description" => "Framework shield-force",
         ]);
+    }
+
+    public static function logout($request)
+    {
+        return AuthSession::logout() ?
+            $request->getRouter()->redirect("/login") :
+            throw new Exception("Error to logout!");
     }
 }

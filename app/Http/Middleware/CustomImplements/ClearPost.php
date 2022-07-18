@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\CustomImplements;
 
-
-use Exception;
-
-class Maintenance
+class ClearPost
 {
     /**
      * Responsable for execute is middleware
@@ -14,9 +11,6 @@ class Maintenance
      */
     public function handle($request, $next)
     {
-        if(env("APP_MAINTENACE")=="true") {
-            throw new Exception("Page under maintenance!", 200);
-        }
         return $next($request);
     }
 }

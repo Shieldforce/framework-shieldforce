@@ -19,11 +19,13 @@ class LoginProcess
         return false;
     }
 
-    public static function auth()
+    private static function auth()
     {
         return [
+            "id"       => 1,
             "email"    => "shieldforce2@gmail.com",
             "password" => Crypt::encrypt("cnsa@020459"),
+            "name"     => "Alexandre Ferreira"
         ];
     }
 }

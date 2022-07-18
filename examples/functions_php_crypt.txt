@@ -1,0 +1,6 @@
+
+// Criptografar string/senhas
+password_hash('string', PASSWORD_DEFAULT);
+
+// Verifica se a senha do usuário é a mesma
+password_verify('senha_enviada', 'senha_guardada');

@@ -10,7 +10,7 @@ class ToastErrors
     public static function validation(ValidatorAbstract $validatorAbstract, $request)
     {
         if (isset($request)) {
-            if($returnValidation = $validatorAbstract->execute($request->getPostParamns())) {
+            if($returnValidation = $validatorAbstract->execute($request->getPostParams())) {
                 $iconToast       = 'fa fa-ban';
                 $typeToast       = "danger";
                 $titleToast      = $returnValidation["message"];

@@ -2,7 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\QueueMiddleware;
+use App\Http\Middleware\Core\QueueMiddleware;
 use App\Http\Request\Request;
 use Closure;
 use Exception;
@@ -260,9 +260,23 @@ class Router
 
     }
 
+    /**
+     * Get url current
+     * @return string
+     */
     public function getCurrentUrl()
     {
         return $this->url.$this->getUri();
+    }
+
+    /**
+     * Get url current
+     * @return void
+     */
+    public function redirect($route)
+    {
+        $url = $this->url.$route;
+        redirect($url);
     }
 
 }
