@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\QueueMiddleware;
 use App\Http\Request\Request;
 use Closure;
 use Exception;
@@ -103,6 +104,9 @@ class Router
                 continue;
             }
         }
+
+        // Start middlewares
+        $params['middlewares'] = $params['middlewares'] ?? [];
 
         // Variables is route
         $params['variables'] = [];
@@ -248,9 +252,17 @@ class Router
             $args[$name] = $route['variables'][$name] ?? '';
         }
 
-        // Return execute controller
-        return call_user_func_array($route['controller'], $args);
+        // Validation middlewares
+        return (new QueueMiddleware($route["middlewares"], $route["controller"], $args))->next($this->request);
 
+        // Return execute controller
+        //return call_user_func_array($route['controller'], $args);
+
+    }
+
+    public function getCurrentUrl()
+    {
+        return $this->url.$this->getUri();
     }
 
 }

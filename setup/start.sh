@@ -36,6 +36,7 @@ echo "APP_NAME=NameIsProject" >> .env
 echo "APP_URL=http://localhost" >> .env
 echo "AMBIENT=local" >> .env
 echo "ERROR_DEBUG=true" >> .env
+echo "APP_MAINTENACE=false" >> .env
 
 if grep -q $pathSfRun "$fileBashRc"; then
   echo "Já existe o alias";

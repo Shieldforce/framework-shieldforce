@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\ConfigMiddlewares;
 use App\Http\Router;
+use \App\Http\Middleware\QueueMiddleware;
 
 class BootSystem
 {
@@ -11,8 +13,6 @@ class BootSystem
         session_start();
 
         // $startConnection = \Config\db\StartConnection::getConnection();
-        // $request = new \App\Http\Request();
-        // $response = new \App\Http\Response(500, "Olá mundo");
 
         // Instance Route
         $route = new Router(env("APP_URL"));
@@ -23,6 +23,12 @@ class BootSystem
         foreach ($arrayIncludes as $include) {
             include($include);
         }
+
+        // Inject middlewares of routes
+        QueueMiddleware::setMap(ConfigMiddlewares::middlewaresInject());
+
+        // Inject middlewares defaults
+        QueueMiddleware::setDefault(ConfigMiddlewares::middlewaresDefault());
 
         $route->run()
               ->sendResponse();

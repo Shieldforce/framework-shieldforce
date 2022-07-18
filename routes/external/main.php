@@ -15,6 +15,7 @@ View::init([
 ]);
 
 $route->get("/", [
+    'middlewares' => [ ],
     function($request) {
         return new Response(200, External\MainController::index($request));
     }
