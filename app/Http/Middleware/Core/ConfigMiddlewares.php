@@ -12,6 +12,7 @@ class ConfigMiddlewares
             "validation_post"       => \App\Http\Middleware\CustomImplements\ValidationPost::class,
             "require_auth_logout"   => \App\Http\Middleware\CustomImplements\RequireAuthLogout::class,
             "auth"                  => \App\Http\Middleware\CustomImplements\Auth::class,
+            "old_fields"            => \App\Http\Middleware\CustomImplements\OldFields::class,
         ];
     }
 

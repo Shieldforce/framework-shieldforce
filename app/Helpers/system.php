@@ -36,3 +36,8 @@ function redirect($url, $status=null)
     header('Location: ' . $url, true, $status ?? 301);
     die;
 }
+
+function old($field)
+{
+    return $_SESSION[$field] ?? null;
+}

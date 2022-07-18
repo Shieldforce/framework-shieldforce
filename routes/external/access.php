@@ -13,7 +13,7 @@ $route->get("/login", [
 ], "external.access.login");
 
 $route->post("/login", [
-    'middlewares' => [ "require_auth_logout", "clear_post", "validation_post" ],
+    'middlewares' => [ "require_auth_logout", "clear_post", "validation_post", "old_fields" ],
     function($request) {
         return new Response(200, External\AccessController::login($request));
     }
@@ -27,7 +27,7 @@ $route->get("/register", [
 ], "external.access.register");
 
 $route->post("/register", [
-    'middlewares' => [ "require_auth_logout", "clear_post", "validation_post" ],
+    'middlewares' => [ "require_auth_logout", "clear_post", "validation_post", "old_fields" ],
     function($request) {
         return new Response(200, External\AccessController::register($request));
     }

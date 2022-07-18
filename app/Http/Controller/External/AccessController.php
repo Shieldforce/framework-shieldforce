@@ -22,7 +22,11 @@ class AccessController extends TemplateController
         //--------------------------------------------------------------------------------------------------------------
         $content      = View::render($request->getRouter()->getName(), []);
         //--------------------------------------------------------------------------------------------------------------
-        $toastErrors  = ToastErrors::validation(new LoginValidator(), $request);
+        if($toastErrors  = ToastErrors::validation(new LoginValidator(), $request)) {
+            if(isset($_SESSION["old_fields"])) {
+                $oldEmail = $_SESSION["old_fields"]["email"] ?? null;
+            }
+        }
         //--------------------------------------------------------------------------------------------------------------
         if (
             isset($request) &&
@@ -56,7 +60,8 @@ class AccessController extends TemplateController
             "description"       => "Framework shield-force",
             "javascript-custom" => $js,
             "head-custom"       => $head,
-            "toastForPhp"       => $toastErrors
+            "toastForPhp"       => $toastErrors,
+            "oldFields::email"  => $oldEmail ?? null
         ]);
     }
 
@@ -68,7 +73,11 @@ class AccessController extends TemplateController
         //--------------------------------------------------------------------------------------------------------------
         $content      = View::render($request->getRouter()->getName(), []);
         //--------------------------------------------------------------------------------------------------------------
-        $toastErrors  = ToastErrors::validation(new RegisterValidator(), $request);
+        if($toastErrors  = ToastErrors::validation(new RegisterValidator(), $request)) {
+            if(isset($_SESSION["old_fields"])) {
+                $oldEmail = $_SESSION["old_fields"]["email"] ?? null;
+            }
+        }
         //--------------------------------------------------------------------------------------------------------------
         if (
             isset($request) &&
@@ -92,7 +101,8 @@ class AccessController extends TemplateController
             "description"       => "Framework shield-force",
             "javascript-custom" => $js,
             "head-custom"       => $head,
-            "toastForPhp"       => $toastErrors
+            "toastForPhp"       => $toastErrors,
+            "oldFields::email"  => $oldEmail ?? null
         ]);
     }
 }
