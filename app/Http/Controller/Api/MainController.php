@@ -2,12 +2,10 @@
 
 namespace App\Http\Controller\Api;
 
-use App\Utils\View;
-
 class MainController
 {
-    public static function index()
+    public static function list()
     {
-        return "api";
+        return "list";
     }
 }

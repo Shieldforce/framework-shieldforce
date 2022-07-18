@@ -1,0 +1,85 @@
+------------------------------------------------------------------------------------------------------------------------
+
+# --- PREG_MATCH --- #
+$string       = 'string text expression, string of expression';
+$expression   = '/(string) (.*)/'; // Expressão para capturar uma palavra especifica
+$function     = preg_match($expression, $string, $matches); // Função preg_match só retorna a primeira ocorrência
+// Resultado obtido na $function
+$matches = [
+    0 => 'string'
+];
+
+------------------------------------------------------------------------------------------------------------------------
+
+# --- PREG_MATCH_ALL --- #
+$string       = '100 200 300 500 4 7 9 todos os números';
+$expression   = '/[0-9]+/'; // Expressão para capturar números
+$function     = preg_match_all($expression, $string, $matches); // Função preg_match_all retorna todas as ocorrências
+// Resultado obtido na $function
+$matches = [
+    0 => 100,
+    1 => 200,
+    1 => 300,
+    1 => 500,
+    1 => 4,
+    1 => 7,
+    1 => 9,
+];
+
+------------------------------------------------------------------------------------------------------------------------
+
+# --- PREG_REPLACE --- #
+$string        = '100cm 200km';      // Origem string
+$string        = ['100cm', '200km']; // Origem array
+$expression1   = '/([0-9]+)cm/';      // Expressão para pegar qualquer número que tenha cm no final
+$expression2   = '/([0-9]+)[a-z]+/';  // Expressão para pegar qualquer número que tenha qualquer letra no final
+$replace       = '$1km';             // Substitui o primeiro grupo= $1 = ([0-9]+)km  por ([0-9]+)km
+$function      = preg_replace($expression, $replace, $string); Não remove oque não bateu na expressão relugar
+// Resultado obtido na $function
+$result="100km 200km"
+
+------------------------------------------------------------------------------------------------------------------------
+
+# --- PREG_FILTER --- #
+$string        = '100cm 200km';      // Origem string
+$expression1   = '/([0-9]+)cm/';      // Expressão para pegar qualquer número que tenha cm no final
+$replace       = '$1km';             // Substitui o primeiro grupo= $1 = ([0-9]+)km  por ([0-9]+)km
+$function      = preg_filter($expression, $replace, $string); Remove os que não bateram na expressão regular
+// Resultado obtido na $function
+$result="100km 200km"
+
+------------------------------------------------------------------------------------------------------------------------
+
+# --- PREG_REPLACE_CALLBACK --- #
+$string        = ['400m','500cm'];
+$expression1   = '/([0-9]+)cm/';
+$replace       = function($matches) {
+    return $matches[1].'m a '.($matches[1]*2).'m';
+};
+$function      = preg_replace_callback($expression, $replace, $string);
+$result        = [
+    [0] => 400m,
+    [1] => 500m a 1000m,
+];
+
+------------------------------------------------------------------------------------------------------------------------
+
+# --- PREG_SPLIT --- #
+$string        = "O rato ro-eu a ro_upa do rei de roma";
+$expression    = '/[\s\-_]/';
+$function      = preg_splitk($expression, $string);
+$result        = [
+    [0]  => o,
+    [1]  => rato,
+    [2]  => ro,
+    [3]  => eu,
+    [4]  => a,
+    [5]  => ro,
+    [6]  => upa,
+    [7]  => do,
+    [8]  => rei,
+    [9]  => de,
+    [10] => roma,
+];
+
+------------------------------------------------------------------------------------------------------------------------

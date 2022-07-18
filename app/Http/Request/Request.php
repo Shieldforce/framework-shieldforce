@@ -1,9 +1,17 @@
 <?php
 
-namespace App\Http;
+namespace App\Http\Request;
+
+use App\Http\Router;
 
 class Request
 {
+
+    /**
+     * Router
+     * @var Router
+     */
+    private $router;
 
     /**
      * Files of page
@@ -50,17 +58,43 @@ class Request
     /**
      * Construct is Class
      */
-    public function __construct()
+    public function __construct($route)
     {
+        $this->router = $route;
         $this->postParams = $_POST ?? [];
         $this->queryParams = $_GET ?? [];
         $this->headers = getallheaders();
-        $this->uri  = $_SERVER['REQUEST_URI'] ?? '/';
+        $this->setUri();
         $this->httpMethod = $_SERVER['REQUEST_METHOD'] ?? '';
         $this->protocol = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
         if(count($_FILES) > 0) {
             $this->files = $_FILES;
         }
+    }
+
+    /**
+     * Method responsable for define the URI
+     * @return void
+     */
+    private function setUri()
+    {
+        // Define uri with gets
+        $this->uri  = $_SERVER['REQUEST_URI'] ?? '/';
+
+        // Remove gets of URI
+        $xURI = explode("?", $this->uri);
+
+        // Set URI without queryParams
+        $this->uri = $xURI[0];
+    }
+
+    /**
+     * Responsable for return the instance of Router
+     * @return Router
+     */
+    public function getRouter()
+    {
+        return $this->router;
     }
 
     /**

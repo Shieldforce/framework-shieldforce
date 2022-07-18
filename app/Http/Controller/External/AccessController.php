@@ -2,36 +2,49 @@
 
 namespace App\Http\Controller\External;
 
+use App\Http\Request\Validations\LoginValidator;
+use App\Utils\Access\LoginProcess;
+use App\Utils\Response\ToastErrors;
 use App\Utils\View;
 
 class AccessController extends TemplateController
 {
 
-    private static $prefixPath = "external/access";
-
-    public static function login($request)
+    public static function login($request=null)
     {
-        $js = View::component(self::$prefixPath."/login/js/index", []);
-        $head = View::component(self::$prefixPath."/login/css/index", []);
-        $content = View::render(self::$prefixPath."/login", []);
+        $js           = View::component($request->getRouter()->getName().".js.index", []);
+        $head         = View::component($request->getRouter()->getName().".css.index", []);
+        $content      = View::render($request->getRouter()->getName(), []);
+        //----------------------------------------------------------------------------
+        $toastErrors  = ToastErrors::validation(new LoginValidator(), $request);
+        if (isset($request) && !$toastErrors && $credentialsVerify = LoginProcess::credentialsVerify($request->getPostParamns())) {
+            redirect("/dashboard");
+        }
+
+        if($_SERVER["REQUEST_METHOD"]=="POST" && !$toastErrors && !$credentialsVerify) {
+            $toastErrors  = ToastErrors::unauthorized($request, "Erro ao logar", "Usuário ou senha incorreto!");
+        }
+
         return self::getTemplate($content, [
-            "title" => "Login!",
-            "description" => "Framework shield-force",
+            "title"             => "Login ",
+            "description"       => "Framework shield-force",
             "javascript-custom" => $js,
-            "head-custom" => $head,
+            "head-custom"       => $head,
+            "toastForPhp"       => $toastErrors
         ]);
     }
 
-    public static function register()
+    public static function register($request)
     {
-        $js = View::component(self::$prefixPath."/register/js/index", []);
-        $head = View::component(self::$prefixPath."/register/css/index", []);
-        $content = View::render(self::$prefixPath."/register", []);
+        $js         = View::component($request->getRouter()->getName().".js.index", []);
+        $head       = View::component($request->getRouter()->getName().".css.index", []);
+        //----------------------------------------------------------------------------
+        $content    = View::render($request->getRouter()->getName(), []);
         return self::getTemplate($content, [
-            "title" => "Cadastro!",
-            "description" => "Framework shield-force",
+            "title"             => "Cadastro ",
+            "description"       => "Framework shield-force",
             "javascript-custom" => $js,
-            "head-custom" => $head,
+            "head-custom"       => $head,
         ]);
     }
 }

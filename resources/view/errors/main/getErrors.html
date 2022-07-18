@@ -20,36 +20,38 @@
             </div>
         </div>
         <h1>Oops!</h1>
-        <h3 class="text-danger">{{message}}</h3>
-        <hr />
-        <table class="table">
-            <thead class="bg-danger">
-            <tr>
-                <td >File:</td>
-                <td colspan="4" style="text-align: left;">{{file}}</td>
-            </tr>
-            </thead>
-            <thead class="bg-danger">
-            <tr>
-                <td >Line:</td>
-                <td colspan="4" style="text-align: left;">{{line}}</td>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th style="width: 40%;">File</th>
-                <th style="width: 10%;">Line</th>
-                <th style="width: 10%;">Function</th>
-                <th style="width: 30%;">Class</th>
-                <th style="width: 10%;">Type</th>
-            </tr>
-            </thead>
-            <tbody>
-                {{trace_list}}
-            </tbody>
-        </table>
-        <hr />
-        <a href="javascript:window.history.back();" class="btn btn-outline-theme px-3 rounded-pill"><i class="fa fa-arrow-left me-1 ms-n1"></i> Voltar Página</a>
+        <div class="px-50px">
+            <h3 class="text-danger">{{message}}</h3>
+            <hr />
+            <table class="table">
+                <thead class="bg-danger">
+                <tr>
+                    <td >File:</td>
+                    <td colspan="4" style="text-align: left;">{{file}}</td>
+                </tr>
+                </thead>
+                <thead class="bg-danger">
+                <tr>
+                    <td >Line:</td>
+                    <td colspan="4" style="text-align: left;">{{line}}</td>
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    <th style="width: 40%;">File</th>
+                    <th style="width: 10%;">Line</th>
+                    <th style="width: 10%;">Function</th>
+                    <th style="width: 30%;">Class</th>
+                    <th style="width: 10%;">Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{trace_list}}
+                </tbody>
+            </table>
+            <!--javascript:window.history.back();-->
+            <a href="{{referer}}" class="btn btn-outline-theme px-3 rounded-pill"><i class="fa fa-arrow-left me-1 ms-n1"></i> Voltar Página</a>
+        </div>
     </div>
 </div>
 <a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>

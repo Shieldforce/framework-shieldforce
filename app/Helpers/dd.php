@@ -33,7 +33,6 @@ function isArrayFormat($value, $type)
 
 function isObjectFormat($object, $type)
 {
-    //$valueReplace = replaceValuesArray((array) $object);
     echo "<pre style='background: black;height: 100%;padding: 0;margin: 0;overflow-y: scroll;'>";
     echo "<div style='color: white;padding: 20px;'>";
     if($type=="var_dump") {
@@ -48,22 +47,34 @@ function isObjectFormat($object, $type)
     return true;
 }
 
-function isObjectFormatError(\Config\error\Handle $handle)
+function isObjectFormatError(\Config\error\Handle $handle, $type)
 {
     $valueReplace = replaceValuesArrayError($handle);
     echo "<pre style='background: black;height: 100%;padding: 0;margin: 0;overflow-y: scroll;'>";
     echo "<div style='color: white;padding: 20px;'>";
-    echo $valueReplace;
+    if($type=="var_dump") {
+        var_dump($valueReplace);
+    }elseif($type=="print_r") {
+        print_r($valueReplace);
+    } else {
+        echo $valueReplace;
+    }
     echo "</div>";
     echo "</pre>";
     return true;
 }
 
-function isStringFormat($value)
+function isStringFormat($value, $type)
 {
     echo "<pre style='background: black;height: 100%;padding: 0;margin: 0;overflow-y: scroll;'>";
     echo "<div style='color: white;padding: 20px;'>";
-    print_r($value);
+    if($type=="var_dump") {
+        var_dump($value);
+    }elseif($type=="print_r") {
+        print_r($value);
+    } else {
+        print_r($value);
+    }
     echo "</div>";
     echo "</pre>";
     return true;
@@ -78,7 +89,13 @@ function verifyTypeValue($value, $type=null)
         isObjectFormat($value, $type);
     }
     if(is_string($value)) {
-        isStringFormat($value);
+        isStringFormat($value, $type);
+    }
+    if(is_int($value)) {
+        isStringFormat($value, $type);
+    }
+    if(is_bool($value)) {
+        isStringFormat($value, $type);
     }
 }
 

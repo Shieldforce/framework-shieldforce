@@ -28,6 +28,7 @@ class View
      */
     private static  function getContentView($view)
     {
+        $view = str_replace(["."],["/"], $view);
         $file = env("ROOT_PATH")."/resources/view/".$view.".html";
         return file_exists($file) ? file_get_contents($file) : "";
     }

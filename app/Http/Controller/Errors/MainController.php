@@ -2,20 +2,19 @@
 
 namespace App\Http\Controller\Errors;
 
-use App\Http\Controller\External\TemplateController;
 use App\Utils\View;
 use Throwable;
 
 class MainController extends TemplateController
 {
 
-    private static $prefixPath = "errors/main";
+    private static $prefixPath = "errors.main.";
 
     public static function traceList($traces)
     {
         $trance_list = "";
         foreach ($traces as $tr) {
-            $trance_list .= View::component("errors/template/components/trace_list", [
+            $trance_list .= View::component("errors.template.components.trace_list", [
                 "trace_file" => $tr["file"],
                 "trace_line" => $tr["line"],
                 "trace_function" => $tr["function"],
@@ -28,26 +27,24 @@ class MainController extends TemplateController
 
     public static function getErrors(Throwable $exception)
     {
-        $code = $exception->getCode();
-        $message = $exception->getMessage();
+        $referer  = $_SERVER["HTTP_REFERER"];
+        $code     = $exception->getCode();
+        $message  = $exception->getMessage();
         $previous = $exception->getPrevious();
-        $file = $exception->getFile();
-        $line = $exception->getLine();
-        $js = View::component(self::$prefixPath."/getErrors/js/index", []);
-        $head = View::component(self::$prefixPath."/getErrors/css/index", []);
-        $content = View::render(self::$prefixPath."/getErrors", [
-            "code" => $code,
-            "message" => $message,
-            "previous" => $previous,
-            "file" => $file,
-            "line" => $line,
-            "trace_list" => self::traceList($exception->getTrace())
+        $file     = $exception->getFile();
+        $line     = $exception->getLine();
+        $content  = View::render(self::$prefixPath."getErrors", [
+            "code"       => $code ?? "",
+            "message"    => $message ?? "",
+            "previous"   => $previous ?? "",
+            "file"       => $file ?? "",
+            "line"       => $line ?? "",
+            "trace_list" => self::traceList($exception->getTrace()),
+            "referer"    => $referer
         ]);
         return self::getTemplate($content, [
-            "title" => "Erro : ",
-            "description" => "Framework shield-force",
-            "javascript-custom" => $js,
-            "head-custom" => $head,
+            "title"             => "Erro : ",
+            "description"       => "Framework shield-force",
         ]);
     }
 }

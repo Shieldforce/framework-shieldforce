@@ -1,0 +1,48 @@
+<div class="toasts-container">
+
+  <div class="toast fade show mb-3" data-autohide="false" id="toast-1">
+    <div class="toast-header">
+      <i class="{{iconToast}} me-2 text-{{typeToast}}"></i>
+      <strong class="me-auto text-{{typeToast}}">{{codeToast}}</strong>
+      <small class="text-{{typeToast}}">{{date}}</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body text-{{typeToast}}">
+      <div class="text-center">{{titleToast}}</div>
+      <hr>
+      {{messageToast}}
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+  /*
+    Template Name: HUD - Responsive Bootstrap 5 Admin Template
+    Version: 1.7.0
+    Author: Sean Ngu
+    Website: http://www.seantheme.com/hud/
+    */
+
+  // var handleToastsInit = function() {
+  //   $('[data-init="toast"]').toast('show');
+  // };
+
+  // var handleToastToggle = function() {
+  //   $(document).on('click', '[data-toggle="toast"]', function(e) {
+  //     e.preventDefault();
+  //
+  //     var targetElm = $(this).attr('data-target');
+  //     $(targetElm).toast('show');
+  //   });
+  // };
+
+  /* Controller
+  ------------------------------------------------ */
+  // $(document).ready(function() {
+  //   handleToastsInit();
+  //   handleToastToggle();
+  // });
+
+</script>

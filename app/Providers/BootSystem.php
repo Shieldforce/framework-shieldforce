@@ -19,11 +19,10 @@ class BootSystem
 
         // Include routes all system
         $path = env("ROOT_PATH")."/routes";
-        $directory = dir($path);
-        while($file = $directory -> read()){
-            include env("ROOT_PATH")."/routes/$file";
+        $arrayIncludes = enterTheFolderAndExecuteFunctionInclude([], $path);
+        foreach ($arrayIncludes as $include) {
+            include($include);
         }
-        $directory -> close();
 
         $route->run()
               ->sendResponse();

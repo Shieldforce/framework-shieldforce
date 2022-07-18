@@ -2,12 +2,20 @@
 
 namespace App\Http;
 
+use App\Http\Request\Request;
 use Closure;
 use Exception;
 use ReflectionFunction;
 
 class Router
 {
+
+    /**
+     * Name is route
+     * @var string
+     */
+    private $name = '';
+
     /**
      * URL complete is project
      * @var string
@@ -38,7 +46,7 @@ class Router
      */
     public function __construct(string $url)
     {
-        $this->request = new Request();
+        $this->request = new Request($this);
         $this->url = $url;
         $this->setPrefix();
     }
@@ -57,14 +65,36 @@ class Router
     }
 
     /**
+     * Method responsable for set name route
+     * @return void
+     */
+    private function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Method responsable for get name route
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name ;
+    }
+
+    /**
      * Method responsable for add a route in Class
      * @param string $method
      * @param string $route
      * @param array $params
      * @return void
      */
-    private function addRoute($method, $route, $params = [])
+    private function addRoute($method, $route, $params, $name)
     {
+
+        // Add name route
+        $params["name"] = $name;
+
         // Validation the params
         foreach ($params as $key => $value) {
             if($value instanceof Closure) {
@@ -98,9 +128,9 @@ class Router
      * @param array $params
      * @return void
      */
-    public function get(string $route, $params = [])
+    public function get(string $route, array $params, string $name)
     {
-        $this->addRoute("GET", $route, $params);
+        $this->addRoute("GET", $route, $params, $name);
     }
 
     /**
@@ -109,9 +139,9 @@ class Router
      * @param array $params
      * @return void
      */
-    public function post(string $route, $params = [])
+    public function post(string $route, array $params, string $name)
     {
-        $this->addRoute("POST", $route, $params);
+        $this->addRoute("POST", $route, $params, $name);
     }
 
     /**
@@ -120,9 +150,9 @@ class Router
      * @param array $params
      * @return void
      */
-    public function put(string $route, $params = [])
+    public function put(string $route, array $params, string $name)
     {
-        $this->addRoute("PUT", $route, $params);
+        $this->addRoute("PUT", $route, $params, $name);
     }
 
     /**
@@ -131,9 +161,9 @@ class Router
      * @param array $params
      * @return void
      */
-    public function delete(string $route, $params = [])
+    public function delete(string $route, array $params, string $name)
     {
-        $this->addRoute("DELETE", $route, $params);
+        $this->addRoute("DELETE", $route, $params, $name);
     }
 
     /**
@@ -187,7 +217,7 @@ class Router
                 throw new Exception("Method not permission", 405);
             }
         }
-        throw new Exception("Url not found", 404);
+        throw new Exception("Page not found", 404);
     }
 
     /**
@@ -199,6 +229,9 @@ class Router
 
         // get route currency
         $route = $this->getRoute();
+
+        // Set name is route currency
+        $this->setName($route["name"]);
 
         // Verify controller
         if(!isset($route['controller'])) {

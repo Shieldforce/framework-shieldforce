@@ -2,30 +2,31 @@
 
 namespace App\Http\Controller\External;
 
+use App\Http\Controller\ComponentsGlobals;
 use App\Utils\View;
 
-class TemplateController
+class TemplateController extends ComponentsGlobals
 {
-    private static $prefixPath = "external/template";
+    private static $prefixPath = "external.template.";
 
     private static function getHead()
     {
-        return View::component(self::$prefixPath."/head", []);
+        return View::component(self::$prefixPath."head", []);
     }
 
     private static function getHeader()
     {
-        return View::component(self::$prefixPath."/header", []);
+        return View::component(self::$prefixPath."header", []);
     }
 
     private static function getAppSidebar()
     {
-        return View::component(self::$prefixPath."/app-sidebar", []);
+        return View::component(self::$prefixPath."app-sidebar", []);
     }
 
     private static function getAppSidebarMobileBackdrop()
     {
-        return View::component(self::$prefixPath."/app-sidebar-mobile-backdrop", []);
+        return View::component(self::$prefixPath."app-sidebar-mobile-backdrop", []);
     }
 
     public static function getTemplate($content, array $args = [])
@@ -38,18 +39,20 @@ class TemplateController
             "content" => $content,
             "scroll-to-top" => self::getScrollToTop(),
             "javascript" => self::getJavascript(),
+            "toastForPhp" => null,
+            "toastForAjax" => null,
         ];
         $arrayAll = array_merge($arrayContent, $args);
-        return View::component(self::$prefixPath."/index", $arrayAll);
+        return View::component(self::$prefixPath."index", $arrayAll);
     }
 
     private static function getScrollToTop()
     {
-        return View::component(self::$prefixPath."/scroll-to-top", []);
+        return View::component(self::$prefixPath."scroll-to-top", []);
     }
 
     private static function getJavascript()
     {
-        return View::component(self::$prefixPath."/javascript", []);
+        return View::component(self::$prefixPath."javascript", []);
     }
 }

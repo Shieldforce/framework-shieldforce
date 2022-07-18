@@ -6,26 +6,26 @@ use App\Utils\View;
 
 class TemplateController
 {
-    private static $prefixPath = "internal/template";
+    private static $prefixPath = "internal.template.";
 
     private static function getHead()
     {
-        return View::component(self::$prefixPath."/head", []);
+        return View::component(self::$prefixPath."head", []);
     }
 
     private static function getHeader()
     {
-        return View::component(self::$prefixPath."/header", []);
+        return View::component(self::$prefixPath."header", []);
     }
 
     private static function getAppSidebar()
     {
-        return View::component(self::$prefixPath."/app-sidebar", []);
+        return View::component(self::$prefixPath."app-sidebar", []);
     }
 
     private static function getAppSidebarMobileBackdrop()
     {
-        return View::component(self::$prefixPath."/app-sidebar-mobile-backdrop", []);
+        return View::component(self::$prefixPath."app-sidebar-mobile-backdrop", []);
     }
 
     public static function getTemplate($content, array $args = [])
@@ -40,16 +40,16 @@ class TemplateController
             "javascript" => self::getJavascript(),
         ];
         $arrayAll = array_merge($arrayContent, $args);
-        return View::component(self::$prefixPath."/index", $arrayAll);
+        return View::component(self::$prefixPath."index", $arrayAll);
     }
 
     private static function getScrollToTop()
     {
-        return View::component(self::$prefixPath."/scroll-to-top", []);
+        return View::component(self::$prefixPath."scroll-to-top", []);
     }
 
     private static function getJavascript()
     {
-        return View::component(self::$prefixPath."/javascript", []);
+        return View::component(self::$prefixPath."javascript", []);
     }
 }

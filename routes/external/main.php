@@ -11,25 +11,13 @@ View::init([
     "env('APP_NAME')" => env('APP_NAME'),
     "assets" => "template/assets",
     "author" => "Alexandre Ferreira do Nascimento",
+    "date" => date("d/m/Y H:i:s")
 ]);
 
 $route->get("/", [
-    function() {
-        return new Response(200, External\MainController::index());
-    }
-]);
-
-$route->get("/login", [
     function($request) {
-        return new Response(200, External\AccessController::login($request));
+        return new Response(200, External\MainController::index($request));
     }
-]);
-
-$route->get("/register", [
-    function() {
-        return new Response(200, External\AccessController::register());
-    }
-]);
-
+], "external.main.home");
 
 

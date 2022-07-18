@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "Config\\": "config/",
-            "App\\": "app/"
+            "App\\": "app/",
+            "Resources\\lang\\": "resources/lang"
         },
         "files": [
             "app/Helpers/system.php",
