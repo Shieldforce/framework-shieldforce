@@ -19,6 +19,13 @@ $route->get("/", [
     function($request) {
         return new Response(200, External\MainController::index($request));
     }
-], "external.main.home");
+], "external.main.index");
+
+$route->get("/terms", [
+    'middlewares' => [ ],
+    function($request) {
+        return new Response(200, External\MainController::terms($request));
+    }
+], "external.main.terms");
 
 

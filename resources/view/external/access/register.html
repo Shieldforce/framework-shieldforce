@@ -1,11 +1,18 @@
 <div class="register">
     <div class="register-content">
         <form action="/register" method="POST" name="register_form">
-            <h1 class="text-center">Registro</h1>
+            <div class="text-center">
+                <a href="/">
+                    <img src="/shieldforce.png" width="150" height="150" alt="Logo shieldforce">
+                </a>
+            </div>
+            <h1 class="text-center">
+                Registro
+            </h1>
             <p class="text-white text-opacity-50 text-center">Se não tem conta, digite seus dados para cria uma..</p>
             <div class="mb-3">
                 <label for="name" class="form-label">Nome completo <span class="text-danger">*</span></label>
-                <input type="text" class="form-control form-control-lg bg-white bg-opacity-5" placeholder="e.g John Smith" value="" id="name" name="name" />
+                <input type="text" class="form-control form-control-lg bg-white bg-opacity-5" placeholder="e.g John Smith" value="{{oldFields::name}}" id="name" name="name" />
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Endereço de e-mail <span class="text-danger">*</span></label>
@@ -13,16 +20,16 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Senha <span class="text-danger">*</span></label>
-                <input type="password" class="form-control form-control-lg bg-white bg-opacity-5" value="" id="password" name="password" />
+                <input type="password" class="form-control form-control-lg bg-white bg-opacity-5" value="{{oldFields::password}}" id="password" name="password" />
             </div>
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Repita a Senha <span class="text-danger">*</span></label>
-                <input type="password" class="form-control form-control-lg bg-white bg-opacity-5" value="" id="password_confirmation" name="password_confirmation" />
+                <input type="password" class="form-control form-control-lg bg-white bg-opacity-5" value="{{oldFields::password_confirmation}}" id="password_confirmation" name="password_confirmation" />
             </div>
             <div class="mb-3">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="terms" name="terms" />
-                    <label for="terms" class="form-check-label">Você precisa aveitar os <a href="#">Termos de uso</a> e <a href="#">Privacidade</a>.</label>
+                    <input class="form-check-input" type="checkbox" value="yes" id="terms" name="terms" />
+                    <label for="terms" class="form-check-label">Aceitar <a href="/terms">Termos e condições de uso</a>.</label>
                 </div>
             </div>
             <div class="mb-3">

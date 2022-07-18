@@ -84,6 +84,15 @@ class Router
     }
 
     /**
+     * Method responsable for get name route
+     * @return array
+     */
+    public function getRoutes()
+    {
+        return $this->routes ;
+    }
+
+    /**
      * Method responsable for add a route in Class
      * @param string $method
      * @param string $route

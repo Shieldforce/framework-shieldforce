@@ -22,7 +22,7 @@ class AccessController extends TemplateController
         //--------------------------------------------------------------------------------------------------------------
         $content      = View::render($request->getRouter()->getName(), []);
         //--------------------------------------------------------------------------------------------------------------
-        if($toastErrors  = ToastErrors::validation(new LoginValidator(), $request)) {
+        if ( $toastErrors  = ToastErrors::validation(new LoginValidator(), $request) ) {
             if(isset($_SESSION["old_fields"])) {
                 $oldEmail = $_SESSION["old_fields"]["email"] ?? null;
             }
@@ -38,7 +38,7 @@ class AccessController extends TemplateController
                 throw new Exception("Error is access dashboard!");
         }
         //--------------------------------------------------------------------------------------------------------------
-        if(isset($_SESSION["unauthorized"])) {
+        if ( isset($_SESSION["unauthorized"]) ) {
             $toastErrors  = ToastErrors::unauthorized(
                 $request,
                 "Acesso negado!",
@@ -47,7 +47,7 @@ class AccessController extends TemplateController
             unset($_SESSION["unauthorized"]);
         }
         //--------------------------------------------------------------------------------------------------------------
-        if($_SERVER["REQUEST_METHOD"]=="POST" && !$toastErrors && !$credentialsVerify) {
+        if ( $_SERVER["REQUEST_METHOD"]=="POST" && !$toastErrors && !$credentialsVerify) {
             $toastErrors  = ToastErrors::unauthorized(
                 $request,
                 "Erro ao logar",
@@ -73,15 +73,9 @@ class AccessController extends TemplateController
         //--------------------------------------------------------------------------------------------------------------
         $content      = View::render($request->getRouter()->getName(), []);
         //--------------------------------------------------------------------------------------------------------------
-        if($toastErrors  = ToastErrors::validation(new RegisterValidator(), $request)) {
-            if(isset($_SESSION["old_fields"])) {
-                $oldEmail = $_SESSION["old_fields"]["email"] ?? null;
-            }
-        }
+        $toastErrors  = ToastErrors::validation(new RegisterValidator(), $request);
         //--------------------------------------------------------------------------------------------------------------
-        if (
-            isset($request) &&
-            !$toastErrors &&
+        if ( isset($request) && !$toastErrors &&
             RegisterProcess::credentialsVerifyIsExistUser($request->getPostParams())
         ) {
             $toastErrors  = ToastErrors::custom(
@@ -96,13 +90,14 @@ class AccessController extends TemplateController
             dd("criar usuário!");
         }
         //--------------------------------------------------------------------------------------------------------------
-        return self::getTemplate($content, [
+        $arrayContent = [
             "title"             => "Cadastro ",
             "description"       => "Framework shield-force",
             "javascript-custom" => $js,
             "head-custom"       => $head,
             "toastForPhp"       => $toastErrors,
-            "oldFields::email"  => $oldEmail ?? null
-        ]);
+            "getPostParams"     => $request->getPostParams()
+        ];
+        return self::getTemplate($content, $arrayContent);
     }
 }

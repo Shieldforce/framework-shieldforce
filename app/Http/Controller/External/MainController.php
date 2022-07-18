@@ -6,13 +6,12 @@ use App\Utils\View;
 
 class MainController extends TemplateController
 {
-    private static $prefixPath = "external.main.";
 
-    public static function index()
+    public static function index($request)
     {
-        $js = View::component(self::$prefixPath."index.js.index", []);
-        $head = View::component(self::$prefixPath."index.css.index", []);
-        $content = View::render(self::$prefixPath."index", [
+        $js = View::component($request->getRouter()->getName().".js.index", []);
+        $head = View::component($request->getRouter()->getName().".css.index", []);
+        $content = View::render($request->getRouter()->getName(), [
             "date('Y')" => date('Y')
         ]);
         return self::getTemplate($content, [
@@ -22,4 +21,20 @@ class MainController extends TemplateController
             "head-custom" => $head,
         ]);
     }
+
+    public static function terms($request)
+    {
+        $js = View::component($request->getRouter()->getName().".js.index", []);
+        $head = View::component($request->getRouter()->getName().".css.index", []);
+        $content = View::render($request->getRouter()->getName(), [
+            "date('Y')" => date('Y')
+        ]);
+        return self::getTemplate($content, [
+            "title" => "Principal",
+            "description" => "Framework shield-force",
+            "javascript-custom" => $js,
+            "head-custom" => $head,
+        ]);
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Request\Validations\Abstracts;
 
 use Exception;
 use Resources\lang\ptBR\Messages;
+use Resources\lang\ptBR\ValidationTypes;
 
 abstract class ValidatorAbstract
 {
@@ -35,19 +36,10 @@ abstract class ValidatorAbstract
             return true;
         }
         $arrayReturnError = self::returnErrorRequired($data, $validations, $arrayReturnError);
-        $arrayReturnError = self::returnErrorTypeData($data, $validations, $arrayReturnError, "string", function ($value){
-            return is_string($value);
-        });
-        $arrayReturnError = self::returnErrorTypeData($data, $validations, $arrayReturnError, "integer", function ($value){
-            return is_integer($value);
-        });
-        $arrayReturnError = self::returnErrorTypeData($data, $validations, $arrayReturnError, "email", function ($value){
-            return filter_var($value, FILTER_VALIDATE_EMAIL);
-        });
-        $arrayReturnError = self::returnErrorTypeData($data, $validations, $arrayReturnError, "array", function ($value){
-            return is_array($value);
-        });
-        $arrayReturnError = self::insertMessages($arrayReturnError);
+        foreach (ValidationTypes::types($validations, $data) as $type => $function) {
+            $arrayReturnError = self::returnErrorTypeData($data, $validations, $arrayReturnError, $type, $function);
+        }
+        $arrayReturnError = self::insertMessages($arrayReturnError, $validations);
         return [
             "code" => 406,
             "message" => "Erro de validação!",
@@ -71,21 +63,42 @@ abstract class ValidatorAbstract
         return $arrayReturnError;
     }
 
-    private static function returnErrorTypeData(array $data, array $validations, $arrayReturnError, $type, callable $callable)
+    public static function returnErrorTypeData(
+        array $data,
+        array $validations,
+        $arrayReturnError,
+        $type,
+        callable $callable
+    )
     {
         foreach ($data as $index=>$d) {
-            if($d && !$callable($d) && in_array($index, array_keys($validations)) && in_array($type, $validations[$index])) {
+            if(
+                $d &&
+                self::validationTypes($validations, $type, $index) &&
+                !$callable($d, $type) &&
+                in_array($index, array_keys($validations))
+
+            ) {
                 $arrayReturnError[$index][] = $type;
             }
         }
-       return $arrayReturnError;
+        return $arrayReturnError;
     }
 
-    private static function insertMessages($arrayReturnError)
+    private static function validationTypes($validations, $type, $index)
+    {
+        $array = $validations[$index];
+        $explode = explode("::", $type);
+        $simbol = $explode[1] ? '::' : '';
+        $preg_grep = preg_grep('/'. $explode[0].$simbol.'.*/', $array);
+        return count($preg_grep);
+    }
+
+    private static function insertMessages($arrayReturnError, $validations)
     {
         foreach ($arrayReturnError as $index => $error) {
             foreach ($error as $error2) {
-                $message = Messages::messageReturn($index, $error2, self::$messages);
+                $message = Messages::messageReturn($index, $error2, self::$messages, $validations);
                 $arrayReturnError[$index] = [$error2 => $message];
             }
         }

@@ -18,6 +18,7 @@ class ToastErrors
                 foreach ($returnValidation["errors"] as $error) {
                     foreach ($error as $error2) {
                         $messageToast   .= "<li>{$error2}</li>";
+                        $messageToast   .= "<hr>";
                     }
                 }
                 $messageToast   .= "</ul>";

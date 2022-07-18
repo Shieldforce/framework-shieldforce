@@ -18,8 +18,9 @@ class RegisterValidator extends ValidatorAbstract
         return [
             "email"                 => ["required", "string", "email"],
             "name"                  => ["required", "string"],
-            "password"              => ["required", "string"],
-            "password_confirmation" => ["required", "string"],
+            "password"              => ["required", "password"],
+            "password_confirmation" => ["required", "same::password"],
+            "terms"                 => ["required"],
         ];
     }
 

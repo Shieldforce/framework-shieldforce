@@ -3,6 +3,7 @@
 namespace App\Http\Controller\External;
 
 use App\Http\Controller\ComponentsGlobals;
+use App\Utils\Request\OldFieldsFromFormsInGetRequests;
 use App\Utils\View;
 
 class TemplateController extends ComponentsGlobals
@@ -31,6 +32,8 @@ class TemplateController extends ComponentsGlobals
 
     public static function getTemplate($content, array $args = [])
     {
+        $content      = OldFieldsFromFormsInGetRequests::remove($content);
+        $arrayFields  = OldFieldsFromFormsInGetRequests::add($args);
         $arrayContent = [
             "head" => self::getHead(),
             "header" => self::getHeader(),
@@ -42,7 +45,9 @@ class TemplateController extends ComponentsGlobals
             "toastForPhp" => null,
             "toastForAjax" => null,
         ];
-        $arrayAll = array_merge($arrayContent, $args);
+        //--------------------------------------------------------------------------------------------------------------
+        $arrayAll = array_merge($arrayContent, $args, $arrayFields);
+        //--------------------------------------------------------------------------------------------------------------
         return View::component(self::$prefixPath."index", $arrayAll);
     }
 
