@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Providers;
-
 use App\Http\Middleware\Core\ConfigMiddlewares;
 use App\Http\Middleware\Core\QueueMiddleware;
 use App\Http\Router;
@@ -10,10 +9,6 @@ class BootSystem
 {
     public static function execute()
     {
-        // session_start();
-
-        // $startConnection = \Config\db\StartConnection::getConnection();
-
         // Instance Route
         $route = new Router(env("APP_URL"));
 

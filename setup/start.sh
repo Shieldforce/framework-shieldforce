@@ -31,12 +31,33 @@ pathSfRun="'$(pwd)/sfrun.sh'"
 chmod 777 $(pwd)/sfrun.sh
 strAlias="alias sfrun=$pathSfRun"
 fileBashRc="/home/alexandrefn/.bashrc"
-echo "ROOT_PATH=$(pwd)" > .env
+
+echo "# Root path is project ----------" > .env
+echo "ROOT_PATH=$(pwd)" >> .env
+echo "" >> .env
+
+echo "# Name is project ----------" >> .env
 echo "APP_NAME=NameIsProject" >> .env
+echo "" >> .env
+
+echo "# Url of access is project ----------" >> .env
 echo "APP_URL=http://localhost" >> .env
+echo "" >> .env
+
+echo "# Url of access is project ----------" >> .env
 echo "AMBIENT=local" >> .env
+echo "" >> .env
+
+echo "# On debug is develop ----------" >> .env
 echo "ERROR_DEBUG=true" >> .env
+echo "" >> .env
+
+echo "# On maintenance is system ----------" >> .env
 echo "APP_MAINTENACE=false" >> .env
+echo "" >> .env
+
+echo "# Connection (1) ----------" >> .env
+echo "DB_CONNECTION_1=mysql" >> .env
 
 if grep -q $pathSfRun "$fileBashRc"; then
   echo "Já existe o alias";
@@ -54,9 +75,9 @@ nameHost(){
 }
 nameHost
 if [ "${arrayInfo[host]}" ]; then
-  echo "DB_HOST=${arrayInfo[host]}" >> .env
+  echo "DB_HOST_1=${arrayInfo[host]}" >> .env
 else
-  echo "DB_HOST=localhost" >> .env
+  echo "DB_HOST_1=localhost" >> .env
 fi
 
 echo "-"
@@ -69,9 +90,9 @@ portHost(){
 }
 portHost
 if [ "${arrayInfo[port]}" ]; then
-  echo "DB_PORT=${arrayInfo[port]}" >> .env
+  echo "DB_PORT_1=${arrayInfo[port]}" >> .env
 else
-  echo "DB_PORT=3306" >> .env
+  echo "DB_PORT_1=3306" >> .env
 fi
 
 echo "-"
@@ -84,9 +105,9 @@ driverDB(){
 }
 driverDB
 if [ "${arrayInfo[driver]}" ]; then
-  echo "DB_DRIVER=${arrayInfo[driver]}" >> .env
+  echo "DB_DRIVER_1=${arrayInfo[driver]}" >> .env
 else
-  echo "DB_DRIVER=mysql" >> .env
+  echo "DB_DRIVER_1=mysql" >> .env
 fi
 
 echo "-"
@@ -94,14 +115,14 @@ echo "-"
 
 # insert DB_NAME -------------------------------------------------------
 nameDB(){
-    read -p "Qual o nome do Banco ? = " name
+    read -p "Qual o nome do Banco ? (Padrão : framework_shieldforce) = " name
     arrayInfo[name]=$name
 }
 nameDB
 if [ "${arrayInfo[name]}" ]; then
-  echo "DB_NAME=${arrayInfo[name]}" >> .env
+  echo "DB_NAME_1=${arrayInfo[name]}" >> .env
 else
-  echo "DB_NAME=nome_db_aleatorio" >> .env
+  echo "DB_NAME_1=framework_shieldforce" >> .env
 fi
 
 echo "-"
@@ -114,9 +135,9 @@ usernameDB(){
 }
 usernameDB
 if [ "${arrayInfo[username]}" ]; then
-  echo "DB_USERNAME=${arrayInfo[username]}" >> .env
+  echo "DB_USERNAME_1=${arrayInfo[username]}" >> .env
 else
-  echo "DB_USERNAME=root" >> .env
+  echo "DB_USERNAME_1=root" >> .env
 fi
 
 echo "-"
@@ -130,10 +151,24 @@ passwordDB(){
 }
 passwordDB
 if [ "${arrayInfo[password]}" ]; then
-  echo "DB_PASSWORD=${arrayInfo[password]}" >> .env
+  echo "DB_PASSWORD_1=${arrayInfo[password]}" >> .env
 else
-  echo "DB_PASSWORD=" >> .env
+  echo "DB_PASSWORD_1=" >> .env
 fi
+
+echo "#--------------- End connection 1 ||" >> .env
+
+echo "" >> .env
+echo "# Connection (2) ----------" >> .env
+echo "#DB_CONNECTION_2=mysql2" >> .env
+echo "#DB_HOST_2=localhost" >> .env
+echo "#DB_PORT_2=3306" >> .env
+echo "#DB_DRIVER_2=mysql" >> .env
+echo "#DB_NAME_2=" >> .env
+echo "#DB_USERNAME_2=root" >> .env
+echo "#DB_PASSWORD_2=" >> .env
+echo "#--------------- End connection 2 ||" >> .env
+
 
 echo "-"
 echo "-"

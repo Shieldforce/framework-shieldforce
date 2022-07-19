@@ -8,7 +8,7 @@ function server($key=null)
 function env($index, $value=null)
 {
     if($value) {
-        $_ENV[$index] = $value;
+        return $_ENV[$index] = $value;
     }
     return str_replace(["\n"],[""], $_ENV[$index]);
 }

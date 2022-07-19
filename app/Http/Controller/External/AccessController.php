@@ -17,11 +17,6 @@ class AccessController extends TemplateController
     public static function login($request=null)
     {
         //--------------------------------------------------------------------------------------------------------------
-        $js           = View::component($request->getRouter()->getName().".js.index", []);
-        $head         = View::component($request->getRouter()->getName().".css.index", []);
-        //--------------------------------------------------------------------------------------------------------------
-        $content      = View::render($request->getRouter()->getName(), []);
-        //--------------------------------------------------------------------------------------------------------------
         if ( $toastErrors  = ToastErrors::validation(new LoginValidator(), $request) ) {
             if(isset($_SESSION["old_fields"])) {
                 $oldEmail = $_SESSION["old_fields"]["email"] ?? null;
@@ -55,6 +50,11 @@ class AccessController extends TemplateController
             );
         }
         //--------------------------------------------------------------------------------------------------------------
+        $js           = View::component($request->getRouter()->getName().".js.index", []);
+        $head         = View::component($request->getRouter()->getName().".css.index", []);
+        //--------------------------------------------------------------------------------------------------------------
+        $content      = View::render($request->getRouter()->getName(), []);
+        //--------------------------------------------------------------------------------------------------------------
         return self::getTemplate($content, [
             "title"             => "Login ",
             "description"       => "Framework shield-force",
@@ -67,11 +67,6 @@ class AccessController extends TemplateController
 
     public static function register($request)
     {
-        //--------------------------------------------------------------------------------------------------------------
-        $js           = View::component($request->getRouter()->getName().".js.index", []);
-        $head         = View::component($request->getRouter()->getName().".css.index", []);
-        //--------------------------------------------------------------------------------------------------------------
-        $content      = View::render($request->getRouter()->getName(), []);
         //--------------------------------------------------------------------------------------------------------------
         $toastErrors  = ToastErrors::validation(new RegisterValidator(), $request);
         //--------------------------------------------------------------------------------------------------------------
@@ -89,6 +84,11 @@ class AccessController extends TemplateController
         if(!$toastErrors && $request->getPostParams()) {
             dd("criar usuário!");
         }
+        //--------------------------------------------------------------------------------------------------------------
+        $js           = View::component($request->getRouter()->getName().".js.index", []);
+        $head         = View::component($request->getRouter()->getName().".css.index", []);
+        //--------------------------------------------------------------------------------------------------------------
+        $content      = View::render($request->getRouter()->getName(), []);
         //--------------------------------------------------------------------------------------------------------------
         $arrayContent = [
             "title"             => "Cadastro ",
