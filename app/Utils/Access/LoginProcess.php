@@ -24,7 +24,7 @@ class LoginProcess
         return [
             "id"       => 1,
             "email"    => "shieldforce2@gmail.com",
-            "password" => Crypt::encrypt("cnsa@020459"),
+            "password" => Crypt::encrypt("1234"),
             "name"     => "Alexandre Ferreira"
         ];
     }
