@@ -34,18 +34,18 @@ sudo bash setup/start.sh --start-system --host 'fsf.local' --port '80' --path-pu
 ### Servidor Embutido (Opcional)
 
 ```
-bash setup/start.sh --start-server --host 'localhost' --port '3000' --path '/public'
+bash sfrun.sh --start-server --host 'localhost' --port '3000' --path '/public'
 ```
 
 ### Comando de Ajuda (Opcional)
 
 ```
-bash setup/start.sh --help
+bash sfrun.sh --help
 ```
 
 ### Versão Framework (Opcional)
 
 ```
-bash setup/start.sh --v
+bash sfrun.sh --v
 ```
 
