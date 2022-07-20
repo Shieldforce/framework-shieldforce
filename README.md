@@ -16,7 +16,7 @@ git clone https://github.com/Shieldforce/framework-shieldforce.git fsf.local
 ### Entrando na pasta do projeto (Obrigatório)
 
 ```
-cd framework-shieldforce.local
+cd fsf.local
 ```
 
 ### Rodando composer update (Obrigatório)
