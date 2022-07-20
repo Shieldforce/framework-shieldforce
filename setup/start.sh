@@ -215,7 +215,7 @@ startEnv()
   echo "-"
   echo "-"
   echo "----------------------- ##### Setup (Instalação Finalizada!) ##### -----------------------"
-  echo "--------- ##### Você pode acessar o Framework por: http:/${hostA}:${portA} ---------------"
+  echo "--------- ##### Você pode acessar o Framework por: http://${hostA}:${portA} ---------------"
 }
 
 if [ $1 -a $1 = "--start-system" ]; then

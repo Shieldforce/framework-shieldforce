@@ -34,18 +34,18 @@ sudo bash setup/start.sh --start-system --host 'fsf.local' --port '80' --path-pu
 ### Servidor Embutido (Opcional)
 
 ```
-sudo bash setup/start.sh --start-server --host 'localhost' --port '3000' --path '/public'
+bash setup/start.sh --start-server --host 'localhost' --port '3000' --path '/public'
 ```
 
 ### Comando de Ajuda (Opcional)
 
 ```
-sudo bash setup/start.sh --help
+bash setup/start.sh --help
 ```
 
 ### Versão Framework (Opcional)
 
 ```
-sudo bash setup/start.sh --v
+bash setup/start.sh --v
 ```
 
