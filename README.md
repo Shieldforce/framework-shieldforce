@@ -1,6 +1,11 @@
 # Framework Shield-Force
 - Para desenvolvimento PHP!
 
+### Dependências:
+- PHP 8.1 FPM
+- Composer
+- Docker
+
 
 ### Baixando o projeto
 
@@ -12,6 +17,12 @@ $: git clone https://github.com/Shieldforce/framework-shieldforce.git framework-
 
 ```
 $: cd framework-shieldforce.local
+```
+
+### Rodando composer update
+
+```
+$: composer update
 ```
 
 ### Setup de instalação do Framework!
