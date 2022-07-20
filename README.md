@@ -2,10 +2,10 @@
 - Para desenvolvimento PHP!
 
 
-### Setup (1) de instalação do Framework!
+### Setup de instalação do Framework!
 
 ```
-$: sfrun --start-system
+$: sfrun --start-system --host 'localhost' --port '80' --path-public '/public_html'
 ```
 
 ### Comando de Ajuda
@@ -23,5 +23,5 @@ $: sfrun --v
 ### Servidor Embutido
 
 ```
-$: sfrun --start-server --port 3000 --host localhost --path /public
+$: sfrun --start-server --host 'localhost' --port '3000' --path '/public'
 ```

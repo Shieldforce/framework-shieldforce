@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # shellcheck disable=SC2039
 # shellcheck disable=SC2154
 # shellcheck disable=SC2046
@@ -10,9 +10,31 @@
 # shellcheck disable=SC1090
 # shellcheck disable=SC2232
 
-read -p "Deseja mesmo rodar o start system? (Todos os dados de .env serão resetados para configuração Padrão!) [Opções yes ou no] : " start
+verifyRoot()
+{
+    if [ $(whoami) != "root" ]
+    then
+      echo "Você precisa informar a senha root"
+      sudo chmod -R 777 ./
+    fi
+}
+
+read -p "Deseja mesmo rodar o start system? (Todos os dados de .env serão resetados para configuração Padrão!) [Opções yes ou no] :
+        Oque será feito nesse comando:
+        1 - Você irá declarar as variáveis de ambiente.
+        2 - Essas variáveis serão gravadas em um arquivo .env na raiz o projeto.
+        3 - Serão criados alias dentro do arquivo ~/.bashrc do seu usuário, no caso de seu sistema ser Linux!
+        4 - Será criado o host no arquivo de hosts /etc/hosts
+        5 - Será criado o host na pasta /etc/apache2/sites-avaliable/
+        5 - Será habilitado o a2ensite
+        6 - Por Último será restartado o serviço do apache2
+        -
+        - Para prosseguir escolha yes ou no: ?
+        " start
 if [ $start = 'yes' ]; then
   echo "Configuração Start Aceita!"
+  echo ""
+  verifyRoot
 else
   echo "Você decidiu não resetar o sistema!"
   exit;
@@ -21,7 +43,7 @@ fi
 echo "-"
 echo "-"
 
-echo "----------------------- ##### Setup (Passo 1 Iniciado!) ##### -----------------------"
+echo "----------------------- ##### Setup (Instalação do Framework!) ##### -----------------------"
 echo "-"
 echo "-"
 echo "- Informações do banco : "
@@ -30,7 +52,7 @@ echo -n > .env
 pathSfRun="'$(pwd)/sfrun.sh'"
 chmod 777 $(pwd)/sfrun.sh
 strAlias="alias sfrun=$pathSfRun"
-fileBashRc="/home/alexandrefn/.bashrc"
+fileBashRc="$HOME/.bashrc"
 
 echo "# Root path is project ----------" > .env
 echo "ROOT_PATH=$(pwd)" >> .env
@@ -172,4 +194,4 @@ echo "#--------------- End connection 2 ||" >> .env
 
 echo "-"
 echo "-"
-echo "----------------------- ##### Setup (Passo 1 Finalizado!) ##### -----------------------"
+echo "----------------------- ##### Setup (Instalação Finalizada!) ##### -----------------------"
