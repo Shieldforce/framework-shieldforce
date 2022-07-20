@@ -2,6 +2,12 @@
 - Para desenvolvimento PHP!
 
 
+### Baixando o projeto
+
+```
+$: git clone https://github.com/Shieldforce/framework-shieldforce.git framework-shieldforce.local
+```
+
 ### Setup de instalação do Framework!
 
 ```
