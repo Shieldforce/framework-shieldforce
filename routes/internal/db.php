@@ -12,4 +12,11 @@ $route->get("/db/list", [
     }
 ], "internal.db.list");
 
+$route->post("/db/datatable", [
+    'middlewares' => [ "auth" ],
+    function($request) {
+        return new Response(200, Internal\DBController::datatable($request));
+    }
+], "internal.db.datatable");
+
 

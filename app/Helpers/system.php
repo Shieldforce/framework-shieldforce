@@ -1,10 +1,5 @@
 <?php
 
-function server($key=null)
-{
-    return $key ? $_SERVER[$key] : $_SERVER;
-}
-
 function env($index, $value=null)
 {
     if($value) {
@@ -37,7 +32,11 @@ function redirect($url, $status=null)
     die;
 }
 
-function old($field)
+function arrayOrderable($list, $order, $dir)
 {
-    return $_SESSION[$field] ?? null;
+    $orderable = $dir == "asc" ? SORT_ASC : SORT_DESC;
+    array_multisort(array_map(function ($element) use($order){
+        return $element[$order];
+    }, $list), $orderable, $list);
+    return $list;
 }

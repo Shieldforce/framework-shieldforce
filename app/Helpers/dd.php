@@ -16,7 +16,7 @@ function dd($value, $type='print_r')
 
 function isArrayFormat($value, $type)
 {
-    //$valueReplace = replaceValuesArray($value);
+    $valueReplace = replaceValuesArray($value);
     echo "<pre style='background: black;height: 100%;padding: 0;margin: 0;overflow-y: scroll;'>";
     echo "<div style='color: white;padding: 20px;'>";
     if($type=="var_dump") {
@@ -24,7 +24,7 @@ function isArrayFormat($value, $type)
     }elseif($type=="print_r") {
         print_r($value);
     } else {
-        print_r($value);
+        print_r($valueReplace);
     }
     echo "</div>";
     echo "</pre>";
