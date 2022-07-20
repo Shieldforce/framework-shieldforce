@@ -5,7 +5,7 @@
 ### Setup de instalação do Framework!
 
 ```
-$: sfrun --start-system --host 'localhost' --port '80' --path-public '/public_html'
+$: sfrun --start-system --host 'framework-shieldforce.local' --port '80' --path-public '/public'
 ```
 
 ### Comando de Ajuda
