@@ -173,6 +173,7 @@ startSystem()
     echo "-"
     echo "-"
     echo "-"
+    chmod -R 777 ./
 }
 
 if [ $1 -a $1 = "--start-system" ]; then

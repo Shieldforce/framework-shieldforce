@@ -167,7 +167,7 @@ startEnv()
   echo "" >> .env
 
   echo "# Url of access is project ----------" >> .env
-  echo "APP_URL=http://localhost" >> .env
+  echo "APP_URL=http://fsf.local" >> .env
   echo "" >> .env
 
   echo "# Url of access is project ----------" >> .env
