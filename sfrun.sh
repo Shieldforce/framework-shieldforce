@@ -55,7 +55,7 @@ helper()
   : (Mostra versão do framework!)
   -
   -"
-  echo "--start-server --host 'localhost' --port '9000' --path '/sufixo'
+  echo "bash sfrun.sh --start-server --host 'localhost' --port '9000' --path '/sufixo'
   // Informaçoes do comando --
   : (Inicia o servidor embutido do PHP!)
   - Lista de parâmetros --
@@ -64,9 +64,9 @@ helper()
   - [--path ( Se o projeto precisar de um sufixo, exemplo: http://meuprojeto.com.br/sufixo )]
   -
   -"
-  echo "--start-system --host 'localhost' --port '80' --path-public '/var/www/you_project/public'
+  echo "sudo bash setup/start.sh --start-system --host 'localhost' --port '80' --path-public 'you_project/public'
   // Informaçoes do comando --
-  : (Inicia a criação das tabelas de sistema!)
+  : (Inicia o build do sistema!)
   - Lista de parâmetros --
   - [--host        ( Dominio do projeto, exemplo: meusite.com.br )]
   - [--port        ( Porta do servidor de hospedagem do projeto )]
