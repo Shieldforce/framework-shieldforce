@@ -19,6 +19,22 @@ verifyRoot()
     fi
 }
 
+createAlias()
+{
+  pathSfRun="'$(pwd)/sfrun.sh'"
+  chmod 777 $(pwd)/sfrun.sh
+  strAlias="alias sfrun=sudo bash $pathSfRun"
+  fileBashRc="/home/${user}/.bashrc"
+
+  if grep -q $pathSfRun "$fileBashRc"; then
+    echo "Já existe o alias";
+  else
+    sudo echo $strAlias >> $fileBashRc
+    source "$fileBashRc"
+  fi
+}
+createAlias
+
 read -p "Deseja mesmo rodar o start system? (Todos os dados de .env serão resetados para configuração Padrão!) [Opções yes ou no] :
         Oque será feito nesse comando:
         1 - Você irá declarar as variáveis de ambiente.
