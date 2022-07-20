@@ -42,88 +42,67 @@ if [ $1 -a $1 = "--create-alias" ]; then
   createAlias
 fi
 
-declare  -A arrayInfo
-
 # insert DB_HOST -------------------------------------------------------
 nameHost(){
     read -p "Qual o host do Banco? (Padrão local : localhost) = " host
-    arrayInfo[host]=$host
+    if [ "${host}" ]; then
+      echo "DB_HOST_1=${host}" >> .env
+    else
+      echo "DB_HOST_1=localhost" >> .env
+    fi
 }
-if [ "${arrayInfo[host]}" ]; then
-  echo "DB_HOST_1=${arrayInfo[host]}" >> .env
-else
-  echo "DB_HOST_1=localhost" >> .env
-fi
 
-echo "-"
-echo "-"
 # insert DB_PORT -------------------------------------------------------
 portHost(){
     read -p "Qual a porta do Banco? (Padrão mysql : 3306) = " port
-    arrayInfo[port]=$port
+    if [ "${port}" ]; then
+      echo "DB_PORT_1=${port}" >> .env
+    else
+      echo "DB_PORT_1=3306" >> .env
+    fi
 }
-if [ "${arrayInfo[port]}" ]; then
-  echo "DB_PORT_1=${arrayInfo[port]}" >> .env
-else
-  echo "DB_PORT_1=3306" >> .env
-fi
-
-echo "-"
-echo "-"
 
 # insert DB_PORT -------------------------------------------------------
 driverDB(){
     read -p "Qual o driver será usado? (Padrão mysql, Opções : [mysql,sqlserver,postgresql]) = " driver
-    arrayInfo[driver]=$driver
+    if [ "${driver}" ]; then
+      echo "DB_DRIVER_1=${driver}" >> .env
+    else
+      echo "DB_DRIVER_1=mysql" >> .env
+    fi
 }
-if [ "${arrayInfo[driver]}" ]; then
-  echo "DB_DRIVER_1=${arrayInfo[driver]}" >> .env
-else
-  echo "DB_DRIVER_1=mysql" >> .env
-fi
-
-echo "-"
-echo "-"
 
 # insert DB_NAME -------------------------------------------------------
 nameDB(){
     read -p "Qual o nome do Banco ? (Padrão : framework_shieldforce) = " name
-    arrayInfo[name]=$name
+    if [ "${name}" ]; then
+      echo "DB_NAME_1=${name}" >> .env
+    else
+      echo "DB_NAME_1=framework_shieldforce" >> .env
+    fi
 }
-if [ "${arrayInfo[name]}" ]; then
-  echo "DB_NAME_1=${arrayInfo[name]}" >> .env
-else
-  echo "DB_NAME_1=framework_shieldforce" >> .env
-fi
-
-echo "-"
-echo "-"
 
 # insert DB_USERNAME -------------------------------------------------------
 usernameDB(){
     read -p "Qual o nome do usuário do Banco? (Padrão root) = " username
-    arrayInfo[username]=$username
+    if [ "${username}" ]; then
+      echo "DB_USERNAME_1=${username}" >> .env
+    else
+      echo "DB_USERNAME_1=root" >> .env
+    fi
 }
-if [ "${arrayInfo[username]}" ]; then
-  echo "DB_USERNAME_1=${arrayInfo[username]}" >> .env
-else
-  echo "DB_USERNAME_1=root" >> .env
-fi
-
-echo "-"
-echo "-"
 
 # insert DB_PASSWORD -------------------------------------------------------
 passwordDB(){
     read -p "Qual a senha do Banco? = " password
     passCrypt=`bash setup/crypt.sh $password`
-    arrayInfo[password]=$passCrypt
+    if [ "${passCrypt}" ]; then
+      echo "DB_PASSWORD_1=${passCrypt}" >> .env
+    else
+      echo "DB_PASSWORD_1=" >> .env
+    fi
 }
-if [ "${arrayInfo[password]}" ]; then
-  echo "DB_PASSWORD_1=${arrayInfo[password]}" >> .env
-else
-  echo "DB_PASSWORD_1=" >> .env
-fi
+
 
 startEnv()
 {
@@ -186,15 +165,10 @@ startEnv()
   echo "DB_CONNECTION_1=mysql" >> .env
 
   nameHost
-
   portHost
-
   driverDB
-
   nameDB
-
   usernameDB
-
   passwordDB
 
   echo "#--------------- End connection 1 ||" >> .env

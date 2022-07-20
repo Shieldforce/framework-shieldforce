@@ -10,8 +10,8 @@ class DBController extends TemplateController
     public static function list($request)
     {
 
-        //$conn = DB::connection("mysql");
-        //dd([$conn->listDatabases()]);
+        $conn = DB::connection("mysql");
+        dd([$conn->listDatabases()]);
 
         $content = View::render($request->getRouter()->getName(), []);
         return self::getTemplate($content, [
