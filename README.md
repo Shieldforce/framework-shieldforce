@@ -25,33 +25,27 @@ cd framework-shieldforce.local
 composer update
 ```
 
-### Criar alias sfrun (Obrigatório)
-
-```
-sfrun --create-alias --user alexandrefn
-```
-
 ### Setup de instalação do Framework! (Obrigatório)
 
 ```
-sfrun --start-system --host 'framework-shieldforce.local' --port '80' --path-public '/public'
+sudo bash setup/start.sh --start-system --host 'framework-shieldforce.local' --port '80' --path-public '/public'
 ```
 
 ### Servidor Embutido (Opcional)
 
 ```
-sfrun --start-server --host 'localhost' --port '3000' --path '/public'
+sudo bash setup/start.sh --start-server --host 'localhost' --port '3000' --path '/public'
 ```
 
 ### Comando de Ajuda (Opcional)
 
 ```
-sfrun --help
+sudo bash setup/start.sh --help
 ```
 
 ### Versão Framework (Opcional)
 
 ```
-sfrun --v
+sudo bash setup/start.sh --v
 ```
 

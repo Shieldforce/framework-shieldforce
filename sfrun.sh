@@ -111,22 +111,9 @@ if [ $1 -a $1 = "--start-server" ]; then
   serverStart
 fi
 
-Login(){
-  if [ "$(id -u)" != "0" ]; then
-    echo
-    echo "Para algumas ações o framework precisará da senha root - :"
-    echo "-:"
-    sudo chmod -R 777 ./
-    #su - root -c "sh /home/user/script.sh"
-  else
-    echo "Logado"
-  fi
-}
-
 # Start System
 startSystem()
 {
-    bash setup/start.sh
     sudo echo "127.0.0.1 ${host}" >> /etc/hosts
     echo "Local host adicionado no arquivo de hosts"
     echo "-"
@@ -145,9 +132,9 @@ startSystem()
 
             ServerName ${host}
             ServerAdmin webmaster@localhost
-            DocumentRoot ${pwd}${path-public}
+            DocumentRoot ${pwd}${path}
 
-            <Directory "${pwd}${path-public}">
+            <Directory "${pwd}${path}">
                Options Indexes FollowSymLinks MultiViews
                AllowOverride All
                Order deny,allow
@@ -197,28 +184,6 @@ if [ $1 -a $1 = "--start-system" ]; then
   fi
   if [ $6 -a $6 = "--path-public" ]; then
       path=$7
-  fi
-  startSystem
-fi
-
-createAlias()
-{
-  pathSfRun="'$(pwd)/sfrun.sh'"
-  chmod 777 $(pwd)/sfrun.sh
-  strAlias="alias sfrun=sudo bash $pathSfRun"
-  fileBashRc="/home/${user}/.bashrc"
-
-  if grep -q $pathSfRun "$fileBashRc"; then
-    echo "Já existe o alias";
-  else
-    sudo echo $strAlias >> $fileBashRc
-    source "$fileBashRc"
-  fi
-}
-
-if [ $1 -a $1 = "--create-alias" ]; then
-  if [ $2 -a $2 = "--user" ]; then
-      user=$3
   fi
   startSystem
 fi
