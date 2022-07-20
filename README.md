@@ -10,7 +10,7 @@
 ### Baixando o projeto (Obrigatório)
 
 ```
-git clone https://github.com/Shieldforce/framework-shieldforce.git framework-shieldforce.local
+git clone https://github.com/Shieldforce/framework-shieldforce.git fsf.local
 ```
 
 ### Entrando na pasta do projeto (Obrigatório)
@@ -28,7 +28,7 @@ composer update
 ### Setup de instalação do Framework! (Obrigatório)
 
 ```
-sudo bash setup/start.sh --start-system --host 'framework-shieldforce.local' --port '80' --path-public '/public'
+sudo bash setup/start.sh --start-system --host 'fsf.local' --port '80' --path-public 'projects/fsf.local/public'
 ```
 
 ### Servidor Embutido (Opcional)

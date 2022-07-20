@@ -132,9 +132,9 @@ startSystem()
 
             ServerName ${host}
             ServerAdmin webmaster@localhost
-            DocumentRoot ${pwd}${path}
+            DocumentRoot /var/www/html/${path}
 
-            <Directory "${pwd}${path}">
+            <Directory "/var/www/html/${path}">
                Options Indexes FollowSymLinks MultiViews
                AllowOverride All
                Order deny,allow
