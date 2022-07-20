@@ -49,11 +49,6 @@ echo "-"
 echo "- Informações do banco : "
 echo -n > .env
 
-pathSfRun="'$(pwd)/sfrun.sh'"
-chmod 777 $(pwd)/sfrun.sh
-strAlias="alias sfrun=$pathSfRun"
-fileBashRc="$HOME/.bashrc"
-
 echo "# Root path is project ----------" > .env
 echo "ROOT_PATH=$(pwd)" >> .env
 echo "" >> .env
@@ -80,13 +75,6 @@ echo "" >> .env
 
 echo "# Connection (1) ----------" >> .env
 echo "DB_CONNECTION_1=mysql" >> .env
-
-if grep -q $pathSfRun "$fileBashRc"; then
-  echo "Já existe o alias";
-else
-  sudo echo $strAlias >> $fileBashRc
-  source "$fileBashRc"
-fi
 
 declare  -A arrayInfo
 
@@ -190,7 +178,6 @@ echo "#DB_NAME_2=" >> .env
 echo "#DB_USERNAME_2=root" >> .env
 echo "#DB_PASSWORD_2=" >> .env
 echo "#--------------- End connection 2 ||" >> .env
-
 
 echo "-"
 echo "-"

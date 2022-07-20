@@ -201,6 +201,28 @@ if [ $1 -a $1 = "--start-system" ]; then
   startSystem
 fi
 
+createAlias()
+{
+  pathSfRun="'$(pwd)/sfrun.sh'"
+  chmod 777 $(pwd)/sfrun.sh
+  strAlias="alias sfrun=sudo bash $pathSfRun"
+  fileBashRc="/home/${user}/.bashrc"
+
+  if grep -q $pathSfRun "$fileBashRc"; then
+    echo "Já existe o alias";
+  else
+    sudo echo $strAlias >> $fileBashRc
+    source "$fileBashRc"
+  fi
+}
+
+if [ $1 -a $1 = "--create-alias" ]; then
+  if [ $2 -a $2 = "--user" ]; then
+      user=$3
+  fi
+  startSystem
+fi
+
 
 
 

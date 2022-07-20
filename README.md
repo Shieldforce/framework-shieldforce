@@ -7,28 +7,34 @@
 - Docker
 
 
-### Baixando o projeto
+### Baixando o projeto (Obrigatório)
 
 ```
 git clone https://github.com/Shieldforce/framework-shieldforce.git framework-shieldforce.local
 ```
 
-### Entrando na pasta do projeto
+### Entrando na pasta do projeto (Obrigatório)
 
 ```
 cd framework-shieldforce.local
 ```
 
-### Rodando composer update
+### Rodando composer update (Obrigatório)
 
 ```
 composer update
 ```
 
-### Setup de instalação do Framework!
+### Setup de instalação do Framework! (Obrigatório)
 
 ```
-sfrun --start-system --host 'framework-shieldforce.local' --port '80' --path-public '/public'
+sudo bash setup/start.sh --host 'framework-shieldforce.local' --port '80' --path-public '/public'
+```
+
+### Criar alias sfrun (Obrigatório)
+
+```
+sfrun --create-alias --user alexandrefn
 ```
 
 ### Servidor Embutido (Opcional)
