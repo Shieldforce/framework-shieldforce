@@ -1,57 +1,53 @@
-<!-- BEGIN toasts-container -->
 <div class="toasts-container">
-  <div class="toast fade hide mb-3" data-autohide="false" id="toast-1">
-    <div class="toast-header">
-      <i class="far fa-bell text-muted me-2"></i>
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
+  <div class="toast hide mb-3" data-autohide="false" id="toast-error-ajax">
+    <div class="toast-header text-danger">
+      <i id="iconToast" class="far fa-ban me-2 text-light"></i>
+      <strong class="codeToast text-light me-auto"></strong>
+      <small class="dateToast text-light"></small>
       <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
     </div>
     <div class="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-  </div>
-  <div class="toast fade hide mb-3" data-autohide="false" id="toast-2">
-    <div class="toast-header">
-      <i class="far fa-bell text-muted me-2"></i>
-      <strong class="me-auto">Bootstrap</strong>
-      <small>2 seconds ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-    </div>
-    <div class="toast-body">
-      See? Just like this.
+      <div class="text-center titleToast text-light"></div>
+      <hr>
+      <div class="messageToast text-light"></div>
     </div>
   </div>
 </div>
-<!-- END toasts-container -->
-
 <script>
 
-  /*
-  Template Name: HUD - Responsive Bootstrap 5 Admin Template
-  Version: 1.7.0
-  Author: Sean Ngu
-  Website: http://www.seantheme.com/hud/
-  */
+  errorDOM = false;
+  count = 0;
+  window.addEventListener('error', function(e) {
+    errorDOM = true;
+    count = count +1;
+    errorRenderToast(e.colno, e.filename, e.lineno, e.message, count)
+  }, true);
 
-  var handleToastsInit = function() {
-    $('[data-init="toast"]').toast('show');
-  };
+  function toastAlert(id=null, iconToast=null, typeToast=null, codeToast=null, date=null, titleToast=null, messageOrHtmlToast=null)
+  {
+      $toastErrorCustom = $(id);
+      $toastErrorCustom.find("#iconToast").removeClass("far fa-ban").addClass(iconToast);
+      $toastErrorCustom.find("#iconToast").removeClass("text-light").addClass(typeToast);
+      $toastErrorCustom.find(".typeToast").removeClass("text-light").addClass(typeToast);
+      $toastErrorCustom.find(".codeToast").removeClass("text-light").addClass(typeToast).text(codeToast);
+      $toastErrorCustom.find(".dateToast").removeClass("text-light").addClass(typeToast).text(date);
+      $toastErrorCustom.find(".titleToast").removeClass("text-light").addClass(typeToast).text(titleToast);
+      $toastErrorCustom.find(".messageToast").removeClass("text-light").addClass(typeToast).html(messageOrHtmlToast);
+      $toastErrorCustom.removeClass("hide").addClass("show");
+  }
 
-  var handleToastToggle = function() {
-    $(document).on('click', '[data-toggle="toast"]', function(e) {
-      e.preventDefault();
-
-      var targetElm = $(this).attr('data-target');
-      $(targetElm).toast('show');
-    });
-  };
-
-  /* Controller
-  ------------------------------------------------ */
-  $(document).ready(function() {
-    handleToastsInit();
-    handleToastToggle();
-  });
+  function errorRenderToast(code, file, line, message, count=null)
+  {
+    let data = new Date();
+    let data2 = new Date(data.valueOf() - data.getTimezoneOffset() * 60000);
+    var dataBase = data2.toISOString().replace(/\.\d{3}Z$/, '');
+    toastAlert("#toast-error-ajax","fa fa-home","text-danger",
+      code,dataBase,message,
+      "<li>File: "+file+"</li>" +
+      "<li>Line: "+line+"</li>" +
+      "<li>Count: "+count+"</li>"
+    );
+  }
 
 </script>
+

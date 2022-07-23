@@ -36,76 +36,29 @@ class DBController extends TemplateController
         ]);
     }
 
-    // Start Data table ------------------------------------------------------------------------------------------------
     public static function datatable($request)
     {
         $list  = (new DBController)->conn->listDatabases();
-        return ServersideDatatable::datatableStart(
-            $request,
-            $list,
-            function ($list, $start, $limit, $requestPost) {
-                return self::dataSearchFilter($list, $start, $limit, $requestPost);
-            },
-            function ($posts, $columns) {
-                return self::returnColumnsFrontend($posts, $columns);
-            },
-        );
-    }
-    // -----------------------------------------------------------------------------------------------------------------
-    private static function setColumns($index, $value)
-    {
-        return [
-            "id"      => $index,
-            "name"    => $value
-        ];
-    }
-    // -----------------------------------------------------------------------------------------------------------------
-    private static function returnColumnsFrontend($posts, $columns)
-    {
-        $data = [];
-        if( $posts ) {
-            foreach ( $posts as $r ) {
-                foreach ( $columns as $key => $col ) {
-                    if($col=="id") {
-                        $nestedData["$col"] = $r["id"] ?? "-";
-                    } elseif($col=="name") {
-                        $nestedData["$col"] = $r["name"] ?? "-";
-                    }  elseif($col=="action") {
-                        $nestedData["$col"]   = "-";
-                    } else {
-                        $nestedData["$col"] = "-";
+        return ServersideDatatable::datatableStart( $request->getPostParams(), $list, function ($posts, $columns) {
+            $data = [];
+            if( $posts ) {
+                foreach ( $posts as $r ) {
+                    foreach ( $columns as $key => $col ) {
+                        if($col=="id") {
+                            $nestedData["$col"] = $r["id"] ?? "-";
+                        } elseif($col=="name") {
+                            $nestedData["$col"] = $r["name"] ?? "-";
+                        }  elseif($col=="action") {
+                            $nestedData["$col"]   = "-";
+                        } else {
+                            $nestedData["$col"] = "-";
+                        }
                     }
+                    $data[] = $nestedData;
                 }
-                $data[] = $nestedData;
             }
-        }
-        return $data;
+            return $data;
+        });
     }
-    // -----------------------------------------------------------------------------------------------------------------
-    private static function dataSearchFilter($list, $start, $limit, $requestPost)
-    {
-        $posts = [];
-        foreach ($list as $index => $value) {
-            if ($index >= $start && $index <= $limit ) {
-                $posts[$index] = self::setColumns($index, $value);
-            }
-        }
-
-        $searchCustom = $requestPost["searchCustom"];
-        $searchCustom = self::filterIsNotNull($searchCustom);
-
-        return $posts;
-    }
-    // -----------------------------------------------------------------------------------------------------------------
-    private static function filterIsNotNull($searchCustom)
-    {
-        foreach ($searchCustom as $index => $sc) {
-            if(!$sc["value"]) {
-                unset($searchCustom[$index]);
-            }
-        }
-        return $searchCustom;
-    }
-    // End Data table --------------------------------------------------------------------------------------------------
 
 }

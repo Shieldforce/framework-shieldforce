@@ -9,6 +9,7 @@ class BootSystem
 {
     public static function execute()
     {
+
         // Instance Route
         $route = new Router(env("APP_URL"));
 

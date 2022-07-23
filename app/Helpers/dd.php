@@ -1,13 +1,5 @@
 <?php
 
-function ddError(\Config\error\Handle $handle)
-{
-    if(isset($_SESSION["error_session"])) {
-        verifyTypeValueError($handle);
-        die;
-    }
-}
-
 function dd($value, $type='print_r')
 {
     verifyTypeValue($value, $type);

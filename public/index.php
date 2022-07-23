@@ -8,18 +8,26 @@ $dotenv = \Dotenv\Dotenv::createMutable(__DIR__."/../");
 
 $dotenv->load();
 
-$error = new \Config\error\Handle();
+$error = new \App\Exceptions\Handle();
 
 try {
 
     \App\Providers\BootSystem::execute();
 
-    unset($_SESSION["error_session"]);
+} catch (\App\Exceptions\HtmlResponseException $exception) {
 
-}  catch (\Throwable $exception) {
+    echo $error->report($exception);
 
-    $instaceException = $error->report($exception);
+} catch (\App\Exceptions\JsonResponseException $exception) {
 
-    echo \App\Http\Controller\Errors\MainController::getErrors($instaceException);
+    echo $error->report($exception);
 
-}
+} catch (\Throwable $exception) {
+
+    echo $error->report($exception);
+
+} /*finally {
+
+    unset($_SESSION["redirectParams"]);
+
+}*/

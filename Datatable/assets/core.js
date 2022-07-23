@@ -1,26 +1,9 @@
-<script src="/template/assets/js/vendor.min.js"></script>
-<script src="/template/assets/js/app.min.js"></script>
-<script src="/template/assets/js/demo/sidebar-scrollspy.demo.js"></script>
-<!-- ================== BEGIN page-js ================== -->
-<script src="/template/assets/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>
-<script src="/template/assets/js/demo/highlightjs.demo.js"></script>
-<script src="/template/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="/template/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-<script src="/template/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/template/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-<script src="/template/assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"></script>
-<script src="/template/assets/js/js.cookie.js"></script>
-<!-- ================== END page-js ================== -->
-<script>
-
-    let data = new Date();
-    let data2 = new Date(data.valueOf() - data.getTimezoneOffset() * 60000);
-    var dataBase = data2.toISOString().replace(/\.\d{3}Z$/, '');
 
     var dataTable = $('#datatableDefault');
-    // var selectModel = $("select[name=search_table]");
+
     $(document).ready(function () {
-        table = dataTable.DataTable({
+
+        dataTable.DataTable({
             dom: "<'row mb-3'<'col-sm-4'l><'col-sm-8 text-end'<'d-flex justify-content-end'fB>>>t<'d-flex align-items-center'<'me-auto'i><'mb-0'p>>",
             lengthMenu: [ 10, 20, 30, 40, 50 ],
             stateSave: false,
@@ -55,6 +38,7 @@
                     "sSortDescending": ": Ordenar colunas de forma descendente"
                 }
             },
+            // Configuração Server Side ----------------------------------------------------------------------------
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -66,17 +50,10 @@
                     return $.extend( {}, d, {
                         "columns"          : columns,
                     } );
-                },
-                error: function (response) {
-                    var exception = response.responseJSON;
-
-                    if(exception) {
-                        errorRenderToast(exception.code, exception.file, exception.line, exception.message)
-                    }
-                    //table.destroy();
-                },
+                }
             },
             "columns":columns
+            // -----------------------------------------------------------------------------------------------------
         });
     });
 
@@ -85,20 +62,17 @@
         var searchDatatable = $(".searchDatatable");
         var searchFields    = [];
         $.each(searchDatatable, function (index, field){
-            var fieldJquery = $(field);
-            searchFields.push({
-                value:fieldJquery.val(),
-                regex:false,
-                column:fieldJquery.attr("name"),
-                dataTypeFilter:fieldJquery.attr("data-type-filter")
-            })
-        });
+        var fieldJquery = $(field);
+        searchFields.push({
+            value:fieldJquery.val(),
+            regex:false,
+            column:fieldJquery.attr("name"),
+            dataTypeFilter:fieldJquery.attr("data-type-filter")
+        })
+    });
         return searchFields;
     }
 
     function resetDatatable () {
         dataTable.DataTable().draw();
     }
-
-</script>
-{{javascript-custom}}

@@ -40,3 +40,10 @@ function arrayOrderable($list, $order, $dir)
     }, $list), $orderable, $list);
     return $list;
 }
+
+function urlServerFull($endpoint)
+{
+    $uri = $_SERVER["SERVER_NAME"];
+    $urlLast = $uri."/".$endpoint;
+    return $_SERVER["REQUEST_SCHEME"]."://".str_replace("//", "/", $urlLast);
+}

@@ -79,6 +79,16 @@ class Response
     }
 
     /**
+     * Method responsable for send the headers for page
+     * @return void
+     */
+    public static function setHttpCode($code)
+    {
+        // Status
+        http_response_code($code);
+    }
+
+    /**
      * Method responsable for response the request
      * @return void
      */

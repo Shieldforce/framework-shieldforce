@@ -41,6 +41,7 @@ class TemplateController
             "content" => $content,
             "scroll-to-top" => self::getScrollToTop(),
             "javascript" => self::getJavascript(),
+            "toastForAjax" => self::getToastAjax()
         ];
         $arrayAll = array_merge($arrayContent, $args, $arrayFields);
         return View::component(self::$prefixPath."index", $arrayAll);
@@ -54,5 +55,10 @@ class TemplateController
     private static function getJavascript()
     {
         return View::component(self::$prefixPath."javascript", []);
+    }
+
+    private static function getToastAjax()
+    {
+        return View::component("global.components.toastForAjax", []);
     }
 }
